@@ -236,7 +236,6 @@ export class TeacherSchema extends BaseModel {
     'createdAt',
     'gender',
     'id',
-    'name',
     'phone',
     'secondaryEmail',
     'ttl',
@@ -256,8 +255,6 @@ export class TeacherSchema extends BaseModel {
   declare gender: string | null
   @column({ isPrimary: true })
   declare id: string
-  @column()
-  declare name: string | null
   @column()
   declare phone: string | null
   @column()

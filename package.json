@@ -17,7 +17,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "ace": "node ace",
-    "db:down-push": "node ace db:wipe; node ace migration:run"
+    "db:pull-push": "node ace db:wipe; node ace migration:run; node ace db:seed"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
