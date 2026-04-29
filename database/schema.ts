@@ -23,7 +23,17 @@ export class AnnnouncementCategorySchema extends BaseModel {
 }
 
 export class AnnnouncementSchema extends BaseModel {
-  static $columns = ['content', 'createdAt', 'documentUrl', 'id', 'status', 'theme', 'title', 'updatedAt', 'userId'] as const
+  static $columns = [
+    'content',
+    'createdAt',
+    'documentUrl',
+    'id',
+    'status',
+    'theme',
+    'title',
+    'updatedAt',
+    'userId',
+  ] as const
   $columns = AnnnouncementSchema.$columns
   @column()
   declare content: string | null
@@ -46,7 +56,18 @@ export class AnnnouncementSchema extends BaseModel {
 }
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
+  static $columns = [
+    'abilities',
+    'createdAt',
+    'expiresAt',
+    'hash',
+    'id',
+    'lastUsedAt',
+    'name',
+    'tokenableId',
+    'type',
+    'updatedAt',
+  ] as const
   $columns = AuthAccessTokenSchema.$columns
   @column()
   declare abilities: string
@@ -71,7 +92,16 @@ export class AuthAccessTokenSchema extends BaseModel {
 }
 
 export class NewsSchema extends BaseModel {
-  static $columns = ['content', 'createdAt', 'id', 'imageUrl', 'pin', 'title', 'updatedAt', 'userId'] as const
+  static $columns = [
+    'content',
+    'createdAt',
+    'id',
+    'imageUrl',
+    'pin',
+    'title',
+    'updatedAt',
+    'userId',
+  ] as const
   $columns = NewsSchema.$columns
   @column()
   declare content: string | null
@@ -105,7 +135,17 @@ export class NewsCategorySchema extends BaseModel {
 }
 
 export class ResearchSchema extends BaseModel {
-  static $columns = ['abstrack', 'createdAt', 'documentUrl', 'id', 'publishedDate', 'status', 'title', 'updatedAt', 'userId'] as const
+  static $columns = [
+    'abstrack',
+    'createdAt',
+    'documentUrl',
+    'id',
+    'publishedDate',
+    'status',
+    'title',
+    'updatedAt',
+    'userId',
+  ] as const
   $columns = ResearchSchema.$columns
   @column()
   declare abstrack: string | null
@@ -141,7 +181,22 @@ export class ResearchTagSchema extends BaseModel {
 }
 
 export class StudentSchema extends BaseModel {
-  static $columns = ['address', 'class', 'createdAt', 'gender', 'grade', 'id', 'nis', 'nisn', 'phone', 'profileUrl', 'status', 'ttl', 'updatedAt', 'userId'] as const
+  static $columns = [
+    'address',
+    'class',
+    'createdAt',
+    'gender',
+    'grade',
+    'id',
+    'nis',
+    'nisn',
+    'phone',
+    'profileUrl',
+    'status',
+    'ttl',
+    'updatedAt',
+    'userId',
+  ] as const
   $columns = StudentSchema.$columns
   @column()
   declare address: string | null
@@ -174,7 +229,19 @@ export class StudentSchema extends BaseModel {
 }
 
 export class TeacherSchema extends BaseModel {
-  static $columns = ['academicHandles', 'academicTitle', 'address', 'createdAt', 'gender', 'id', 'phone', 'secondaryEmail', 'ttl', 'updatedAt', 'userId'] as const
+  static $columns = [
+    'academicHandles',
+    'academicTitle',
+    'address',
+    'createdAt',
+    'gender',
+    'id',
+    'phone',
+    'secondaryEmail',
+    'ttl',
+    'updatedAt',
+    'userId',
+  ] as const
   $columns = TeacherSchema.$columns
   @column()
   declare academicHandles: string | null
@@ -201,7 +268,15 @@ export class TeacherSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'id', 'password', 'role', 'updatedAt', 'username'] as const
+  static $columns = [
+    'createdAt',
+    'email',
+    'id',
+    'password',
+    'role',
+    'updatedAt',
+    'username',
+  ] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
