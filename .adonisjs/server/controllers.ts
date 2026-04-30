@@ -6,6 +6,8 @@
 export const controllers = {
   Auth: () => import('#controllers/auth_controller'),
   HealthChecks: () => import('#controllers/health_checks_controller'),
+  NewsCategories: () => import('#controllers/news_categories_controller'),
+  News: () => import('#controllers/news_controller'),
   Students: () => import('#controllers/students_controller'),
   Teachers: () => import('#controllers/teachers_controller'),
   Users: () => import('#controllers/users_controller'),

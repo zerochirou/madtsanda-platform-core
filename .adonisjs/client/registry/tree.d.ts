@@ -36,4 +36,20 @@ export interface ApiDefinition {
     editTeacherById: typeof routes['teachers.edit_teacher_by_id']
     destroyTeacherById: typeof routes['teachers.destroy_teacher_by_id']
   }
+  newsCategories: {
+    showAllNewsCategory: typeof routes['news_categories.show_all_news_category']
+    showNewsCategoryById: typeof routes['news_categories.show_news_category_by_id']
+    submitNewsCategory: typeof routes['news_categories.submit_news_category']
+    editNewsCategory: typeof routes['news_categories.edit_news_category']
+    destroyNewsCategory: typeof routes['news_categories.destroy_news_category']
+  }
+  news: {
+    submitNews: typeof routes['news.submit_news']
+    editNews: typeof routes['news.edit_news']
+    destroyNews: typeof routes['news.destroy_news']
+    showAllNews: typeof routes['news.show_all_news']
+    showAllNewsPaginate: typeof routes['news.show_all_news_paginate']
+    showNewsById: typeof routes['news.show_news_by_id']
+    showNewsByCategoryId: typeof routes['news.show_news_by_category_id']
+  }
 }

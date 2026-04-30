@@ -93,6 +93,7 @@ export class AuthAccessTokenSchema extends BaseModel {
 
 export class NewsSchema extends BaseModel {
   static $columns = [
+    'categoryId',
     'content',
     'createdAt',
     'id',
@@ -104,6 +105,8 @@ export class NewsSchema extends BaseModel {
   ] as const
   $columns = NewsSchema.$columns
   @column()
+  declare categoryId: string | null
+  @column()
   declare content: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -112,7 +115,7 @@ export class NewsSchema extends BaseModel {
   @column()
   declare imageUrl: string | null
   @column()
-  declare pin: string | null
+  declare pin: boolean | null
   @column()
   declare title: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })

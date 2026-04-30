@@ -295,4 +295,148 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/teachers_controller').default['destroyTeacherByID']>>>
     }
   }
+  'news_categories.show_all_news_category': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news/category'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['showAllNewsCategory']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['showAllNewsCategory']>>>
+    }
+  }
+  'news_categories.show_news_category_by_id': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news/category/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['showNewsCategoryById']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['showNewsCategoryById']>>>
+    }
+  }
+  'news_categories.submit_news_category': {
+    methods: ["POST"]
+    pattern: '/api/v1/news/category'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/news_category').createNewsCategoryValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/news_category').createNewsCategoryValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['submitNewsCategory']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['submitNewsCategory']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'news_categories.edit_news_category': {
+    methods: ["PUT"]
+    pattern: '/api/v1/news/category/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/news_category').updateNewsCategoryValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/news_category').updateNewsCategoryValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['editNewsCategory']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['editNewsCategory']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'news_categories.destroy_news_category': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/news/category/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['destroyNewsCategory']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_categories_controller').default['destroyNewsCategory']>>>
+    }
+  }
+  'news.submit_news': {
+    methods: ["POST"]
+    pattern: '/api/v1/news'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/news').createNewsValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/news').createNewsValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['submitNews']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['submitNews']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'news.edit_news': {
+    methods: ["PUT"]
+    pattern: '/api/v1/news/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/news').updateNewsValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/news').updateNewsValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['editNews']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['editNews']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'news.destroy_news': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/news/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['destroyNews']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['destroyNews']>>>
+    }
+  }
+  'news.show_all_news': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showAllNews']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showAllNews']>>>
+    }
+  }
+  'news.show_all_news_paginate': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news/paginate'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showAllNewsPaginate']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showAllNewsPaginate']>>>
+    }
+  }
+  'news.show_news_by_id': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsById']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsById']>>>
+    }
+  }
+  'news.show_news_by_category_id': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news/:id/category'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsByCategoryId']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsByCategoryId']>>>
+    }
+  }
 }
