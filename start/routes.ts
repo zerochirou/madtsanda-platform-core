@@ -70,5 +70,29 @@ router
         router.delete('/:id', [controllers.Teachers, 'destroyTeacherByID'])
       })
       .prefix('teacher')
+
+    router
+      .group(() => {
+        router
+          .group(() => {
+            router.get('/', [controllers.NewsCategories, 'showAllNewsCategory'])
+            router.get('/:id', [controllers.NewsCategories, 'showNewsCategoryById'])
+            router.post('/', [controllers.NewsCategories, 'submitNewsCategory'])
+            router.put('/:id', [controllers.NewsCategories, 'editNewsCategory'])
+            router.delete('/:id', [controllers.NewsCategories, 'destroyNewsCategory'])
+          })
+          .prefix('/category')
+
+        router.post('/', [controllers.News, 'submitNews'])
+        router.put('/:id', [controllers.News, 'editNews']).where('id', router.matchers.uuid())
+        router.delete('/:id', [controllers.News, 'destroyNews']).where('id', router.matchers.uuid())
+        router.get('/', [controllers.News, 'showAllNews'])
+        router.get('/paginate', [controllers.News, 'showAllNewsPaginate'])
+        router.get('/:id', [controllers.News, 'showNewsById']).where('id', router.matchers.uuid())
+        router
+          .get('/:id/category', [controllers.News, 'showNewsByCategoryId'])
+          .where('id', router.matchers.uuid())
+      })
+      .prefix('news')
   })
   .prefix('/api/v1')

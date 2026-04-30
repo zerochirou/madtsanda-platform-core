@@ -1,11 +1,14 @@
+version: '3.8'
+
 services:
   mysql-db:
     image: mysql:8.0
     container_name: madtsanda_platform_database
     restart: always
     environment:
+      # Gunakan variabel dari file .env agar lebih aman
       MYSQL_ROOT_PASSWORD: 1141140203
-      MYSQL_DATABASE: madtsanada_platform_database
+      MYSQL_DATABASE: madtsanda_platform_database
       MYSQL_USER: super_user
       MYSQL_PASSWORD: 1141140203
     ports:
@@ -13,5 +16,23 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: rustfs_server
+    ports:
+      - "9000:9000" 
+      - "9001:9001"
+    environment:
+      - RUSTFS_ACCESS_KEY=super_user
+      - RUSTFS_SECRET_KEY=1141140203
+      - RUSTFS_ADDRESS=:9000
+      - RUSTFS_CONSOLE_ENABLE=true
+    volumes:
+      - rustfs_data:/var/lib/rustfs_data
+    restart: unless-stopped
+
 volumes:
   mysql_data:
+    driver: local
+  rustfs_data:
+    driver: local

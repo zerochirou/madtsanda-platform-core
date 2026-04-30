@@ -28,6 +28,18 @@ export type ScannedRoutes = {
     'teachers.destroy_teacher': { paramsTuple?: []; params?: {} }
     'teachers.edit_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.destroy_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news_categories.show_all_news_category': { paramsTuple?: []; params?: {} }
+    'news_categories.show_news_category_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news_categories.submit_news_category': { paramsTuple?: []; params?: {} }
+    'news_categories.edit_news_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news_categories.destroy_news_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.submit_news': { paramsTuple?: []; params?: {} }
+    'news.edit_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.destroy_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.show_all_news': { paramsTuple?: []; params?: {} }
+    'news.show_all_news_paginate': { paramsTuple?: []; params?: {} }
+    'news.show_news_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.show_news_by_category_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'health_checks.live': { paramsTuple?: []; params?: {} }
@@ -39,6 +51,12 @@ export type ScannedRoutes = {
     'teachers.show_all_teacher': { paramsTuple?: []; params?: {} }
     'teachers.show_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.show_teacher_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news_categories.show_all_news_category': { paramsTuple?: []; params?: {} }
+    'news_categories.show_news_category_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.show_all_news': { paramsTuple?: []; params?: {} }
+    'news.show_all_news_paginate': { paramsTuple?: []; params?: {} }
+    'news.show_news_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.show_news_by_category_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'health_checks.live': { paramsTuple?: []; params?: {} }
@@ -50,12 +68,20 @@ export type ScannedRoutes = {
     'teachers.show_all_teacher': { paramsTuple?: []; params?: {} }
     'teachers.show_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.show_teacher_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news_categories.show_all_news_category': { paramsTuple?: []; params?: {} }
+    'news_categories.show_news_category_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.show_all_news': { paramsTuple?: []; params?: {} }
+    'news.show_all_news_paginate': { paramsTuple?: []; params?: {} }
+    'news.show_news_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.show_news_by_category_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'users.submit_user': { paramsTuple?: []; params?: {} }
     'auth.login': { paramsTuple?: []; params?: {} }
     'students.submit_student': { paramsTuple?: []; params?: {} }
     'teachers.submit_teacher': { paramsTuple?: []; params?: {} }
+    'news_categories.submit_news_category': { paramsTuple?: []; params?: {} }
+    'news.submit_news': { paramsTuple?: []; params?: {} }
   }
   PATCH: {
     'users.update_user': { paramsTuple?: []; params?: {} }
@@ -67,12 +93,16 @@ export type ScannedRoutes = {
     'students.destroy_student_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.destroy_teacher': { paramsTuple?: []; params?: {} }
     'teachers.destroy_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news_categories.destroy_news_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.destroy_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PUT: {
     'students.edit_student': { paramsTuple?: []; params?: {} }
     'students.edit_student_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.edit_teacher': { paramsTuple?: []; params?: {} }
     'teachers.edit_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news_categories.edit_news_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'news.edit_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

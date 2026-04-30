@@ -150,6 +150,78 @@ const routes = {
     tokens: [{"old":"/api/v1/teacher/:id","type":0,"val":"api","end":""},{"old":"/api/v1/teacher/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/teacher/:id","type":0,"val":"teacher","end":""},{"old":"/api/v1/teacher/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['teachers.destroy_teacher_by_id']['types'],
   },
+  'news_categories.show_all_news_category': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news/category',
+    tokens: [{"old":"/api/v1/news/category","type":0,"val":"api","end":""},{"old":"/api/v1/news/category","type":0,"val":"v1","end":""},{"old":"/api/v1/news/category","type":0,"val":"news","end":""},{"old":"/api/v1/news/category","type":0,"val":"category","end":""}],
+    types: placeholder as Registry['news_categories.show_all_news_category']['types'],
+  },
+  'news_categories.show_news_category_by_id': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news/category/:id',
+    tokens: [{"old":"/api/v1/news/category/:id","type":0,"val":"api","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"news","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"category","end":""},{"old":"/api/v1/news/category/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['news_categories.show_news_category_by_id']['types'],
+  },
+  'news_categories.submit_news_category': {
+    methods: ["POST"],
+    pattern: '/api/v1/news/category',
+    tokens: [{"old":"/api/v1/news/category","type":0,"val":"api","end":""},{"old":"/api/v1/news/category","type":0,"val":"v1","end":""},{"old":"/api/v1/news/category","type":0,"val":"news","end":""},{"old":"/api/v1/news/category","type":0,"val":"category","end":""}],
+    types: placeholder as Registry['news_categories.submit_news_category']['types'],
+  },
+  'news_categories.edit_news_category': {
+    methods: ["PUT"],
+    pattern: '/api/v1/news/category/:id',
+    tokens: [{"old":"/api/v1/news/category/:id","type":0,"val":"api","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"news","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"category","end":""},{"old":"/api/v1/news/category/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['news_categories.edit_news_category']['types'],
+  },
+  'news_categories.destroy_news_category': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/news/category/:id',
+    tokens: [{"old":"/api/v1/news/category/:id","type":0,"val":"api","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"news","end":""},{"old":"/api/v1/news/category/:id","type":0,"val":"category","end":""},{"old":"/api/v1/news/category/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['news_categories.destroy_news_category']['types'],
+  },
+  'news.submit_news': {
+    methods: ["POST"],
+    pattern: '/api/v1/news',
+    tokens: [{"old":"/api/v1/news","type":0,"val":"api","end":""},{"old":"/api/v1/news","type":0,"val":"v1","end":""},{"old":"/api/v1/news","type":0,"val":"news","end":""}],
+    types: placeholder as Registry['news.submit_news']['types'],
+  },
+  'news.edit_news': {
+    methods: ["PUT"],
+    pattern: '/api/v1/news/:id',
+    tokens: [{"old":"/api/v1/news/:id","type":0,"val":"api","end":""},{"old":"/api/v1/news/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/news/:id","type":0,"val":"news","end":""},{"old":"/api/v1/news/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['news.edit_news']['types'],
+  },
+  'news.destroy_news': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/news/:id',
+    tokens: [{"old":"/api/v1/news/:id","type":0,"val":"api","end":""},{"old":"/api/v1/news/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/news/:id","type":0,"val":"news","end":""},{"old":"/api/v1/news/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['news.destroy_news']['types'],
+  },
+  'news.show_all_news': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news',
+    tokens: [{"old":"/api/v1/news","type":0,"val":"api","end":""},{"old":"/api/v1/news","type":0,"val":"v1","end":""},{"old":"/api/v1/news","type":0,"val":"news","end":""}],
+    types: placeholder as Registry['news.show_all_news']['types'],
+  },
+  'news.show_all_news_paginate': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news/paginate',
+    tokens: [{"old":"/api/v1/news/paginate","type":0,"val":"api","end":""},{"old":"/api/v1/news/paginate","type":0,"val":"v1","end":""},{"old":"/api/v1/news/paginate","type":0,"val":"news","end":""},{"old":"/api/v1/news/paginate","type":0,"val":"paginate","end":""}],
+    types: placeholder as Registry['news.show_all_news_paginate']['types'],
+  },
+  'news.show_news_by_id': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news/:id',
+    tokens: [{"old":"/api/v1/news/:id","type":0,"val":"api","end":""},{"old":"/api/v1/news/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/news/:id","type":0,"val":"news","end":""},{"old":"/api/v1/news/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['news.show_news_by_id']['types'],
+  },
+  'news.show_news_by_category_id': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news/:id/category',
+    tokens: [{"old":"/api/v1/news/:id/category","type":0,"val":"api","end":""},{"old":"/api/v1/news/:id/category","type":0,"val":"v1","end":""},{"old":"/api/v1/news/:id/category","type":0,"val":"news","end":""},{"old":"/api/v1/news/:id/category","type":1,"val":"id","end":""},{"old":"/api/v1/news/:id/category","type":0,"val":"category","end":""}],
+    types: placeholder as Registry['news.show_news_by_category_id']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }
