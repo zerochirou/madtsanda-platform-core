@@ -3,13 +3,15 @@ import drive from '@adonisjs/drive/services/main'
 import { randomUUID } from 'node:crypto'
 
 interface FileStorageServiceContract {
-  profileStore(file: MultipartFile): Promise<[string, string]>
-  profileDestroy(key: string | null): Promise<void>
+  studentProfileStore(file: MultipartFile): Promise<[string, string]>
+  studentProfileDestroy(key: string | null): Promise<void>
+  teacherProfileStore(file: MultipartFile): Promise<[string, string]>
+  teacherProfileDestroy(key: string | null): Promise<void>
   storeAvatar(file: MultipartFile): Promise<string>
 }
 
 export class FileStorageService implements FileStorageServiceContract {
-  public async profileStore(file: MultipartFile): Promise<[string, string]> {
+  public async studentProfileStore(file: MultipartFile): Promise<[string, string]> {
     const fileName = `${randomUUID()}.${file.extname}`
     const folder = 'students_profile'
     const key = `${folder}/${fileName}`
@@ -18,7 +20,20 @@ export class FileStorageService implements FileStorageServiceContract {
     return [key, url]
   }
 
-  public async profileDestroy(key: string | null): Promise<void> {
+  public async studentProfileDestroy(key: string | null): Promise<void> {
+    await drive.use('s3').delete(String(key))
+  }
+
+  public async teacherProfileStore(file: MultipartFile): Promise<[string, string]> {
+    const fileName = `${randomUUID()}.${file.extname}`
+    const folder = 'profile_profile'
+    const key = `${folder}/${fileName}`
+    await file.moveToDisk(key)
+    const url = await drive.use('s3').getUrl(key)
+    return [key, url]
+  }
+
+  public async teacherProfileDestroy(key: string | null): Promise<void> {
     await drive.use('s3').delete(String(key))
   }
 
