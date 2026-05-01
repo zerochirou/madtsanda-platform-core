@@ -1,6 +1,6 @@
 import Student from '#models/student'
 import { createStudentValidator, updateStudentValidator } from '#validators/student'
-import type { Infer } from '@vinejs/vine/types'
+import { Infer } from '@vinejs/vine/types'
 import { FileStorageService } from './file_storage_service.ts'
 import { inject } from '@adonisjs/core'
 
