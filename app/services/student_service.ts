@@ -19,20 +19,12 @@ export class StudentService implements StudentServiceContract {
   constructor(protected fileStorageService: FileStorageService) {}
 
   public async createStudent(data: Infer<typeof createStudentValidator>): Promise<Student> {
-    const [profileKey, profileUrl] = await this.fileStorageService.profileStore(data.profile)
+    const { profile, ...dataRest } = data
+    const [profileKey, profileUrl] = await this.fileStorageService.profileStore(profile)
     const student = await Student.create({
-      userId: data.userId,
-      nis: data.nis,
-      nisn: data.nisn,
-      address: data.address,
-      class: data.class,
-      grade: data.gender,
-      gender: data.gender,
-      phone: data.phone,
       profileKey: profileKey,
       profileUrl: profileUrl,
-      status: data.status,
-      ttl: data.ttl,
+      ...dataRest,
     })
 
     return student
