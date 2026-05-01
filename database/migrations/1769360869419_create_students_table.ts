@@ -6,12 +6,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary()
-      table.string('nis')
-      table.string('nisn')
+      table.string('nis').unique()
+      table.string('nisn').unique()
       table.string('grade')
       table.string('class')
       table.enum('status', ['active', 'graduate', 'DO'])
       table.string('profile_url').nullable()
+      table.string('profile_key').nullable()
       table.enum('gender', ['male', 'female'])
       table.string('TTL').nullable()
       table.string('phone').nullable()

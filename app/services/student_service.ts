@@ -1,40 +1,92 @@
 import Student from '#models/student'
+import { createStudentValidator, updateStudentValidator } from '#validators/student'
+import type { Infer } from '@vinejs/vine/types'
+import { FileStorageService } from './file_storage_service.ts'
+import { inject } from '@adonisjs/core'
 
 interface StudentServiceContract {
-  createStudent(student: Student): Promise<Student>
-  updateStudent(id: string, data: Student): Promise<Student>
-  updateStudentByUserID(id: string, data: Student): Promise<Student>
+  createStudent(student: Infer<typeof createStudentValidator>): Promise<Student>
+  updateStudent(id: string, data: Infer<typeof updateStudentValidator>): Promise<Student>
+  updateStudentByUserID(id: string, data: Infer<typeof updateStudentValidator>): Promise<Student>
   destroyStudent(id: string): Promise<void>
   getAllStudent(): Promise<Student[]>
   getStudentByID(id: string): Promise<Student>
   getStudentByNIS(nis: string): Promise<Student>
 }
 
+@inject()
 export class StudentService implements StudentServiceContract {
-  public async createStudent(data: Partial<Student>): Promise<Student> {
-    const student = await Student.create(data)
+  constructor(protected fileStorageService: FileStorageService) {}
+
+  public async createStudent(data: Infer<typeof createStudentValidator>): Promise<Student> {
+    const [profileKey, profileUrl] = await this.fileStorageService.profileStore(data.profile)
+    const student = await Student.create({
+      userId: data.userId,
+      nis: data.nis,
+      nisn: data.nisn,
+      address: data.address,
+      class: data.class,
+      grade: data.gender,
+      gender: data.gender,
+      phone: data.phone,
+      profileKey: profileKey,
+      profileUrl: profileUrl,
+      status: data.status,
+      ttl: data.ttl,
+    })
 
     return student
   }
 
-  public async updateStudent(id: string, data: Partial<Student>): Promise<Student> {
+  public async updateStudent(
+    id: string,
+    data: Infer<typeof updateStudentValidator>
+  ): Promise<Student> {
+    const student = await Student.query().where('user_id', id).firstOrFail()
+    const { profile, ...updateData } = data
+    let newProfileUrl: string | undefined
+    let newProfileKey: string | undefined
+
+    if (profile) {
+      ;[newProfileKey, newProfileUrl] = await this.fileStorageService.profileStore(profile)
+      await this.fileStorageService.profileDestroy(student.profileKey)
+    }
+
+    student.merge({
+      ...updateData,
+      ...(data.profile ? { profileKey: newProfileKey, profileUrl: newProfileUrl } : {}),
+    })
+
+    await student.save()
+    return student
+  }
+
+  public async updateStudentByUserID(
+    id: string,
+    data: Infer<typeof updateStudentValidator>
+  ): Promise<Student> {
     const student = await Student.findOrFail(id)
-    student.merge(data)
+    const { profile, ...updateData } = data
+    let newProfileUrl: string | undefined
+    let newProfileKey: string | undefined
+
+    if (profile) {
+      ;[newProfileKey, newProfileUrl] = await this.fileStorageService.profileStore(profile)
+      await this.fileStorageService.profileDestroy(student.profileKey)
+    }
+
+    student.merge({
+      ...updateData,
+      ...(data.profile ? { profileKey: newProfileKey, profileUrl: newProfileUrl } : {}),
+    })
+
     await student.save()
-
-    return student
-  }
-
-  public async updateStudentByUserID(id: string, data: Partial<Student>): Promise<Student> {
-    const student = await Student.findByOrFail('user_id', id)
-    student.merge(data)
-    await student.save()
-
     return student
   }
 
   public async destroyStudent(id: string): Promise<void> {
     const student = await Student.findOrFail(id)
+    await this.fileStorageService.profileDestroy(student.profileKey)
     await student.delete()
   }
 

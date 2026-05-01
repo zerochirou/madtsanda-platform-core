@@ -1,11 +1,14 @@
 import vine from '@vinejs/vine'
 
 const createStudentValidator = vine.create({
-  nisn: vine.string(),
-  nis: vine.string(),
+  nisn: vine.string().unique({ table: 'students', column: 'nisn' }),
+  nis: vine.string().unique({ table: 'students', column: 'nisn' }),
   grade: vine.string(),
   class: vine.string(),
-  profile_url: vine.string(),
+  profile: vine.file({
+    size: '10mb',
+    extnames: ['jpg', 'png', 'jpeg'],
+  }),
   gender: vine.enum(['female', 'male']),
   ttl: vine.string(),
   status: vine.enum(['active', 'graduate', 'DO']),
@@ -15,11 +18,16 @@ const createStudentValidator = vine.create({
 })
 
 const updateStudentValidator = vine.create({
-  nisn: vine.string().optional(),
-  nis: vine.string().optional(),
+  nisn: vine.string().unique({ table: 'students', column: 'nisn' }).optional(),
+  nis: vine.string().unique({ table: 'students', column: 'nisn' }).optional(),
   grade: vine.string().optional(),
   class: vine.string().optional(),
-  profile_url: vine.string().optional(),
+  profile: vine
+    .file({
+      size: '10mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    })
+    .optional(),
   gender: vine.enum(['male', 'female']).optional(),
   ttl: vine.string().optional(),
   status: vine.enum(['active', 'graduate', 'DO']).optional(),

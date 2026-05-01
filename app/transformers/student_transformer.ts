@@ -14,6 +14,7 @@ export default class StudentTransformer extends BaseTransformer<Student> {
       'status',
       'grade',
       'class',
+      'profileKey',
       'profileUrl',
       'user',
     ])

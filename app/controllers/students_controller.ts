@@ -38,7 +38,7 @@ export default class StudentsController {
   public async editStudent(ctx: HttpContext) {
     const { id } = ctx.auth.getUserOrFail()
     const payload = await ctx.request.validateUsing(updateStudentValidator)
-    const updatedStudent = await this.studentService.updateStudentByUserID(id, payload)
+    const updatedStudent = await this.studentService.updateStudent(id, payload)
 
     return ctx.serialize(StudentTransformer.transform(updatedStudent))
   }
@@ -46,7 +46,7 @@ export default class StudentsController {
   public async editStudentByID(ctx: HttpContext) {
     const id = await ctx.request.param('id')
     const payload = await ctx.request.validateUsing(updateStudentValidator)
-    const updatedStudent = await this.studentService.updateStudent(id, payload)
+    const updatedStudent = await this.studentService.updateStudentByUserID(id, payload)
 
     return ctx.serialize(StudentTransformer.transform(updatedStudent))
   }
