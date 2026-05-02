@@ -439,4 +439,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsByCategoryId']>>>
     }
   }
+  'research_tags.show_all_research_tags': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/research/tag'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['showAllResearchTags']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['showAllResearchTags']>>>
+    }
+  }
+  'research_tags.show_research_tag_by_id': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/research/tag/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['showResearchTagById']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['showResearchTagById']>>>
+    }
+  }
+  'research_tags.submit_research_tag': {
+    methods: ["POST"]
+    pattern: '/api/v1/research/tag'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/research_tag').createResearchTagValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/research_tag').createResearchTagValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['submitResearchTag']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['submitResearchTag']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'research_tags.edit_research_tag': {
+    methods: ["PUT"]
+    pattern: '/api/v1/research/tag/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/research_tag').updateResearchTagValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/research_tag').updateResearchTagValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['editResearchTag']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['editResearchTag']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'research_tags.destroy_research_tag': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/research/tag/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['destroyResearchTag']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['destroyResearchTag']>>>
+    }
+  }
 }

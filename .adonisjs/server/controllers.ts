@@ -11,4 +11,5 @@ export const controllers = {
   Students: () => import('#controllers/students_controller'),
   Teachers: () => import('#controllers/teachers_controller'),
   Users: () => import('#controllers/users_controller'),
+  ResearchTags: () => import('#controllers/research_tags_controller'),
 }
