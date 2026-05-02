@@ -71,7 +71,7 @@ export class NewsCategorySchema extends BaseModel {
 }
 
 export class ResearchSchema extends BaseModel {
-  static $columns = ['abstrack', 'createdAt', 'documentKey', 'documentUrl', 'id', 'publishedDate', 'status', 'title', 'updatedAt', 'userId'] as const
+  static $columns = ['abstrack', 'createdAt', 'documentKey', 'documentUrl', 'id', 'publishedDate', 'researchTagId', 'status', 'title', 'updatedAt', 'userId'] as const
   $columns = ResearchSchema.$columns
   @column()
   declare abstrack: string | null
@@ -85,6 +85,8 @@ export class ResearchSchema extends BaseModel {
   declare id: string
   @column()
   declare publishedDate: string | null
+  @column()
+  declare researchTagId: string | null
   @column()
   declare status: string | null
   @column()

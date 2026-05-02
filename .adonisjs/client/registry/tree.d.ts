@@ -50,6 +50,7 @@ export interface ApiDefinition {
     showAllNews: typeof routes['news.show_all_news']
     showAllNewsPaginate: typeof routes['news.show_all_news_paginate']
     showNewsById: typeof routes['news.show_news_by_id']
+    showNewsBySearch: typeof routes['news.show_news_by_search']
     showNewsByCategoryId: typeof routes['news.show_news_by_category_id']
   }
   researchTags: {
@@ -58,5 +59,14 @@ export interface ApiDefinition {
     submitResearchTag: typeof routes['research_tags.submit_research_tag']
     editResearchTag: typeof routes['research_tags.edit_research_tag']
     destroyResearchTag: typeof routes['research_tags.destroy_research_tag']
+  }
+  research: {
+    showAllResearch: typeof routes['research.show_all_research']
+    showResearchById: typeof routes['research.show_research_by_id']
+    showResearchBySearch: typeof routes['research.show_research_by_search']
+    submitResearch: typeof routes['research.submit_research']
+    editResearch: typeof routes['research.edit_research']
+    showResearchByUserId: typeof routes['research.show_research_by_user_id']
+    destroyResearch: typeof routes['research.destroy_research']
   }
 }

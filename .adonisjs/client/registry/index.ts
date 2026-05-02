@@ -216,6 +216,12 @@ const routes = {
     tokens: [{"old":"/api/v1/news/:id","type":0,"val":"api","end":""},{"old":"/api/v1/news/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/news/:id","type":0,"val":"news","end":""},{"old":"/api/v1/news/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['news.show_news_by_id']['types'],
   },
+  'news.show_news_by_search': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news/search',
+    tokens: [{"old":"/api/v1/news/search","type":0,"val":"api","end":""},{"old":"/api/v1/news/search","type":0,"val":"v1","end":""},{"old":"/api/v1/news/search","type":0,"val":"news","end":""},{"old":"/api/v1/news/search","type":0,"val":"search","end":""}],
+    types: placeholder as Registry['news.show_news_by_search']['types'],
+  },
   'news.show_news_by_category_id': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/news/:id/category',
@@ -251,6 +257,48 @@ const routes = {
     pattern: '/api/v1/research/tag/:id',
     tokens: [{"old":"/api/v1/research/tag/:id","type":0,"val":"api","end":""},{"old":"/api/v1/research/tag/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/research/tag/:id","type":0,"val":"research","end":""},{"old":"/api/v1/research/tag/:id","type":0,"val":"tag","end":""},{"old":"/api/v1/research/tag/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['research_tags.destroy_research_tag']['types'],
+  },
+  'research.show_all_research': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/research',
+    tokens: [{"old":"/api/v1/research","type":0,"val":"api","end":""},{"old":"/api/v1/research","type":0,"val":"v1","end":""},{"old":"/api/v1/research","type":0,"val":"research","end":""}],
+    types: placeholder as Registry['research.show_all_research']['types'],
+  },
+  'research.show_research_by_id': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/research/:id',
+    tokens: [{"old":"/api/v1/research/:id","type":0,"val":"api","end":""},{"old":"/api/v1/research/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/research/:id","type":0,"val":"research","end":""},{"old":"/api/v1/research/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['research.show_research_by_id']['types'],
+  },
+  'research.show_research_by_search': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/research/search',
+    tokens: [{"old":"/api/v1/research/search","type":0,"val":"api","end":""},{"old":"/api/v1/research/search","type":0,"val":"v1","end":""},{"old":"/api/v1/research/search","type":0,"val":"research","end":""},{"old":"/api/v1/research/search","type":0,"val":"search","end":""}],
+    types: placeholder as Registry['research.show_research_by_search']['types'],
+  },
+  'research.submit_research': {
+    methods: ["POST"],
+    pattern: '/api/v1/research',
+    tokens: [{"old":"/api/v1/research","type":0,"val":"api","end":""},{"old":"/api/v1/research","type":0,"val":"v1","end":""},{"old":"/api/v1/research","type":0,"val":"research","end":""}],
+    types: placeholder as Registry['research.submit_research']['types'],
+  },
+  'research.edit_research': {
+    methods: ["PUT"],
+    pattern: '/api/v1/research/:id',
+    tokens: [{"old":"/api/v1/research/:id","type":0,"val":"api","end":""},{"old":"/api/v1/research/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/research/:id","type":0,"val":"research","end":""},{"old":"/api/v1/research/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['research.edit_research']['types'],
+  },
+  'research.show_research_by_user_id': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/research/user/:id',
+    tokens: [{"old":"/api/v1/research/user/:id","type":0,"val":"api","end":""},{"old":"/api/v1/research/user/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/research/user/:id","type":0,"val":"research","end":""},{"old":"/api/v1/research/user/:id","type":0,"val":"user","end":""},{"old":"/api/v1/research/user/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['research.show_research_by_user_id']['types'],
+  },
+  'research.destroy_research': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/research/:id',
+    tokens: [{"old":"/api/v1/research/:id","type":0,"val":"api","end":""},{"old":"/api/v1/research/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/research/:id","type":0,"val":"research","end":""},{"old":"/api/v1/research/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['research.destroy_research']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 
