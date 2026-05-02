@@ -13,6 +13,8 @@ export default class extends BaseSchema {
       table.string('academic_title').nullable()
       table.string('academic_handles').nullable()
       table.string('address').nullable()
+      table.string('profile_url').nullable()
+      table.string('profile_key').nullable()
 
       table.uuid('user_id').references('id').inTable('users').onDelete('SET NULL')
       table.timestamp('created_at')

@@ -94,5 +94,25 @@ router
           .where('id', router.matchers.uuid())
       })
       .prefix('news')
+
+    router
+      .group(() => {
+        router
+          .group(() => {
+            router.get('/', [controllers.ResearchTags, 'showAllResearchTags'])
+            router
+              .get('/:id', [controllers.ResearchTags, 'showResearchTagById'])
+              .where('id', router.matchers.uuid())
+            router.post('/', [controllers.ResearchTags, 'submitResearchTag'])
+            router
+              .put('/:id', [controllers.ResearchTags, 'editResearchTag'])
+              .where('id', router.matchers.uuid())
+            router
+              .delete('/:id', [controllers.ResearchTags, 'destroyResearchTag'])
+              .where('id', router.matchers.uuid())
+          })
+          .prefix('/tag')
+      })
+      .prefix('/research')
   })
   .prefix('/api/v1')

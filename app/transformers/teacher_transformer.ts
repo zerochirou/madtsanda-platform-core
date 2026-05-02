@@ -5,10 +5,11 @@ export default class TeacherTransformer extends BaseTransformer<Teacher> {
   toObject() {
     return this.pick(this.resource, [
       'id',
-      'name',
       'academicTitle',
       'academicHandles',
       'gender',
+      'profileUrl',
+      'profileKey',
       'ttl',
       'address',
       'phone',

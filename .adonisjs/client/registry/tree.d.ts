@@ -52,4 +52,11 @@ export interface ApiDefinition {
     showNewsById: typeof routes['news.show_news_by_id']
     showNewsByCategoryId: typeof routes['news.show_news_by_category_id']
   }
+  researchTags: {
+    showAllResearchTags: typeof routes['research_tags.show_all_research_tags']
+    showResearchTagById: typeof routes['research_tags.show_research_tag_by_id']
+    submitResearchTag: typeof routes['research_tags.submit_research_tag']
+    editResearchTag: typeof routes['research_tags.edit_research_tag']
+    destroyResearchTag: typeof routes['research_tags.destroy_research_tag']
+  }
 }

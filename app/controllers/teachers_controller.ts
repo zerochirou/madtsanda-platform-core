@@ -52,7 +52,7 @@ export default class TeachersController {
 
   public async destroyTeacher(ctx: HttpContext) {
     const { id } = ctx.auth.getUserOrFail()
-    await this.teacherService.destroyTeacherByUser(id)
+    await this.teacherService.destroyTeacherByUserId(id)
 
     return ctx.serialize({
       message: 'Teacher was deleted successfully',

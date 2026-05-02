@@ -7,46 +7,6 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
-export class AnnnouncementCategorySchema extends BaseModel {
-  static $columns = ['category', 'color', 'createdAt', 'id', 'updatedAt'] as const
-  $columns = AnnnouncementCategorySchema.$columns
-  @column()
-  declare category: string | null
-  @column()
-  declare color: string | null
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
-  @column({ isPrimary: true })
-  declare id: string
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-}
-
-export class AnnnouncementSchema extends BaseModel {
-  static $columns = ['content', 'createdAt', 'documentKey', 'documentUrl', 'id', 'status', 'theme', 'title', 'updatedAt', 'userId'] as const
-  $columns = AnnnouncementSchema.$columns
-  @column()
-  declare content: string | null
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
-  @column()
-  declare documentKey: string | null
-  @column()
-  declare documentUrl: string | null
-  @column({ isPrimary: true })
-  declare id: string
-  @column()
-  declare status: string | null
-  @column()
-  declare theme: string | null
-  @column()
-  declare title: string | null
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-  @column()
-  declare userId: string | null
-}
-
 export class AuthAccessTokenSchema extends BaseModel {
   static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
   $columns = AuthAccessTokenSchema.$columns

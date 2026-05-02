@@ -55,14 +55,12 @@ export class NewsService implements NewsServiceContract {
   }
 
   public async createNews(data: Infer<typeof createNewsValidator>): Promise<News> {
-    const storedImageUrl = await this.fileStorageService.storeAvatar(data.image)
+    const { image, ...dataRest } = data
+    const [imageKey, imageUrl] = await this.fileStorageService.bannerImageStore(image)
     const news = await News.create({
-      userId: data.userId,
-      categoryId: data.categoryId,
-      content: data.content,
-      title: data.title,
-      pin: data.pin,
-      imageUrl: storedImageUrl,
+      imageKey: imageKey,
+      imageUrl: imageUrl,
+      ...dataRest,
     })
 
     return news
@@ -70,18 +68,18 @@ export class NewsService implements NewsServiceContract {
 
   public async updateNews(id: string, data: Infer<typeof updateNewsValidator>): Promise<News> {
     const news = await News.findOrFail(id)
-
-    const { image, ...updateData } = data
-
+    const { image, ...dataRest } = data
+    let newImageKey: string | undefined
     let newImageUrl: string | undefined
 
     if (image) {
-      newImageUrl = await this.fileStorageService.storeAvatar(image)
+      ;[newImageKey, newImageUrl] = await this.fileStorageService.bannerImageStore(image)
+      await this.fileStorageService.bannerImageDestroy(news.imageKey)
     }
 
     news.merge({
-      ...updateData,
-      ...(newImageUrl ? { imageUrl: newImageUrl } : {}),
+      ...dataRest,
+      ...(image ? { imageKey: newImageKey, imageUrl: newImageUrl } : {}),
     })
 
     await news.save()
@@ -90,6 +88,7 @@ export class NewsService implements NewsServiceContract {
 
   public async deleteNews(id: string): Promise<void> {
     const news = await News.findOrFail(id)
+    await this.fileStorageService.bannerImageDestroy(news.imageKey)
 
     await news.delete()
   }

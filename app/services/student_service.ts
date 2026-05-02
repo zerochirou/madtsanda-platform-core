@@ -1,6 +1,6 @@
 import Student from '#models/student'
 import { createStudentValidator, updateStudentValidator } from '#validators/student'
-import type { Infer } from '@vinejs/vine/types'
+import { Infer } from '@vinejs/vine/types'
 import { FileStorageService } from './file_storage_service.ts'
 import { inject } from '@adonisjs/core'
 
@@ -19,20 +19,12 @@ export class StudentService implements StudentServiceContract {
   constructor(protected fileStorageService: FileStorageService) {}
 
   public async createStudent(data: Infer<typeof createStudentValidator>): Promise<Student> {
-    const [profileKey, profileUrl] = await this.fileStorageService.profileStore(data.profile)
+    const { profile, ...dataRest } = data
+    const [profileKey, profileUrl] = await this.fileStorageService.studentProfileStore(profile)
     const student = await Student.create({
-      userId: data.userId,
-      nis: data.nis,
-      nisn: data.nisn,
-      address: data.address,
-      class: data.class,
-      grade: data.gender,
-      gender: data.gender,
-      phone: data.phone,
       profileKey: profileKey,
       profileUrl: profileUrl,
-      status: data.status,
-      ttl: data.ttl,
+      ...dataRest,
     })
 
     return student
@@ -48,8 +40,8 @@ export class StudentService implements StudentServiceContract {
     let newProfileKey: string | undefined
 
     if (profile) {
-      ;[newProfileKey, newProfileUrl] = await this.fileStorageService.profileStore(profile)
-      await this.fileStorageService.profileDestroy(student.profileKey)
+      ;[newProfileKey, newProfileUrl] = await this.fileStorageService.studentProfileStore(profile)
+      await this.fileStorageService.teacherProfileDestroy(student.profileKey)
     }
 
     student.merge({
@@ -71,8 +63,8 @@ export class StudentService implements StudentServiceContract {
     let newProfileKey: string | undefined
 
     if (profile) {
-      ;[newProfileKey, newProfileUrl] = await this.fileStorageService.profileStore(profile)
-      await this.fileStorageService.profileDestroy(student.profileKey)
+      ;[newProfileKey, newProfileUrl] = await this.fileStorageService.studentProfileStore(profile)
+      await this.fileStorageService.teacherProfileDestroy(student.profileKey)
     }
 
     student.merge({
@@ -86,7 +78,7 @@ export class StudentService implements StudentServiceContract {
 
   public async destroyStudent(id: string): Promise<void> {
     const student = await Student.findOrFail(id)
-    await this.fileStorageService.profileDestroy(student.profileKey)
+    await this.fileStorageService.teacherProfileDestroy(student.profileKey)
     await student.delete()
   }
 

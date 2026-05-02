@@ -10,6 +10,10 @@ const createTeacherValidator = vine.create({
   phone: vine.string().optional(),
   secondaryEmail: vine.string().email().optional(),
   userId: vine.string().uuid(),
+  profile: vine.file({
+    size: '10mb',
+    extnames: ['jpg', 'png', 'jpeg'],
+  }),
 })
 
 const updateTeacherValidator = vine.create({
@@ -22,6 +26,12 @@ const updateTeacherValidator = vine.create({
   phone: vine.string().optional(),
   secondaryEmail: vine.string().email().optional(),
   userId: vine.string().uuid().optional(),
+  profile: vine
+    .file({
+      size: '10mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    })
+    .optional(),
 })
 
 export { createTeacherValidator, updateTeacherValidator }

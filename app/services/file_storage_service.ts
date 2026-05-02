@@ -3,13 +3,16 @@ import drive from '@adonisjs/drive/services/main'
 import { randomUUID } from 'node:crypto'
 
 interface FileStorageServiceContract {
-  profileStore(file: MultipartFile): Promise<[string, string]>
-  profileDestroy(key: string | null): Promise<void>
-  storeAvatar(file: MultipartFile): Promise<string>
+  studentProfileStore(file: MultipartFile): Promise<[string, string]>
+  studentProfileDestroy(key: string | null): Promise<void>
+  teacherProfileStore(file: MultipartFile): Promise<[string, string]>
+  teacherProfileDestroy(key: string | null): Promise<void>
+  bannerImageStore(file: MultipartFile): Promise<[string, string]>
+  bannerImageDestroy(key: string | null): Promise<void>
 }
 
 export class FileStorageService implements FileStorageServiceContract {
-  public async profileStore(file: MultipartFile): Promise<[string, string]> {
+  public async studentProfileStore(file: MultipartFile): Promise<[string, string]> {
     const fileName = `${randomUUID()}.${file.extname}`
     const folder = 'students_profile'
     const key = `${folder}/${fileName}`
@@ -18,14 +21,33 @@ export class FileStorageService implements FileStorageServiceContract {
     return [key, url]
   }
 
-  public async profileDestroy(key: string | null): Promise<void> {
+  public async studentProfileDestroy(key: string | null): Promise<void> {
     await drive.use('s3').delete(String(key))
   }
 
-  public async storeAvatar(file: MultipartFile): Promise<string> {
-    const key = `avatars/${randomUUID()}-${file.extname}`
+  public async teacherProfileStore(file: MultipartFile): Promise<[string, string]> {
+    const fileName = `${randomUUID()}.${file.extname}`
+    const folder = 'teacher_profile'
+    const key = `${folder}/${fileName}`
     await file.moveToDisk(key)
     const url = await drive.use('s3').getUrl(key)
-    return url
+    return [key, url]
+  }
+
+  public async teacherProfileDestroy(key: string | null): Promise<void> {
+    await drive.use('s3').delete(String(key))
+  }
+
+  public async bannerImageStore(file: MultipartFile): Promise<[string, string]> {
+    const fileName = `${randomUUID()}.${file.extname}`
+    const folder = 'news_banner'
+    const key = `${folder}/${fileName}`
+    await file.moveToDisk(key)
+    const url = await drive.use('s3').getUrl(key)
+    return [key, url]
+  }
+
+  public async bannerImageDestroy(key: string | null): Promise<void> {
+    await drive.use('s3').delete(String(key))
   }
 }

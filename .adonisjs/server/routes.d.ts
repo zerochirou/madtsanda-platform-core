@@ -40,6 +40,11 @@ export type ScannedRoutes = {
     'news.show_all_news_paginate': { paramsTuple?: []; params?: {} }
     'news.show_news_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news.show_news_by_category_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'research_tags.show_all_research_tags': { paramsTuple?: []; params?: {} }
+    'research_tags.show_research_tag_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'research_tags.submit_research_tag': { paramsTuple?: []; params?: {} }
+    'research_tags.edit_research_tag': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'research_tags.destroy_research_tag': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'health_checks.live': { paramsTuple?: []; params?: {} }
@@ -57,6 +62,8 @@ export type ScannedRoutes = {
     'news.show_all_news_paginate': { paramsTuple?: []; params?: {} }
     'news.show_news_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news.show_news_by_category_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'research_tags.show_all_research_tags': { paramsTuple?: []; params?: {} }
+    'research_tags.show_research_tag_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'health_checks.live': { paramsTuple?: []; params?: {} }
@@ -74,6 +81,8 @@ export type ScannedRoutes = {
     'news.show_all_news_paginate': { paramsTuple?: []; params?: {} }
     'news.show_news_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news.show_news_by_category_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'research_tags.show_all_research_tags': { paramsTuple?: []; params?: {} }
+    'research_tags.show_research_tag_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'users.submit_user': { paramsTuple?: []; params?: {} }
@@ -82,6 +91,7 @@ export type ScannedRoutes = {
     'teachers.submit_teacher': { paramsTuple?: []; params?: {} }
     'news_categories.submit_news_category': { paramsTuple?: []; params?: {} }
     'news.submit_news': { paramsTuple?: []; params?: {} }
+    'research_tags.submit_research_tag': { paramsTuple?: []; params?: {} }
   }
   PATCH: {
     'users.update_user': { paramsTuple?: []; params?: {} }
@@ -95,6 +105,7 @@ export type ScannedRoutes = {
     'teachers.destroy_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news_categories.destroy_news_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news.destroy_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'research_tags.destroy_research_tag': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PUT: {
     'students.edit_student': { paramsTuple?: []; params?: {} }
@@ -103,6 +114,7 @@ export type ScannedRoutes = {
     'teachers.edit_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news_categories.edit_news_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news.edit_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'research_tags.edit_research_tag': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

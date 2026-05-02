@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('title').unique()
       table.string('abstrack')
       table.string('document_url').notNullable()
+      table.string('document_key').notNullable()
       table.string('published_date')
       table.enum('status', ['pending', 'has_done'])
       table.uuid('user_id').references('id').inTable('users').onDelete('SET NULL')
