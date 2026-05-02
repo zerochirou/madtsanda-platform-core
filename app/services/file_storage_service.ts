@@ -7,7 +7,8 @@ interface FileStorageServiceContract {
   studentProfileDestroy(key: string | null): Promise<void>
   teacherProfileStore(file: MultipartFile): Promise<[string, string]>
   teacherProfileDestroy(key: string | null): Promise<void>
-  storeAvatar(file: MultipartFile): Promise<string>
+  bannerImageStore(file: MultipartFile): Promise<[string, string]>
+  bannerImageDestroy(key: string | null): Promise<void>
 }
 
 export class FileStorageService implements FileStorageServiceContract {
@@ -37,10 +38,16 @@ export class FileStorageService implements FileStorageServiceContract {
     await drive.use('s3').delete(String(key))
   }
 
-  public async storeAvatar(file: MultipartFile): Promise<string> {
-    const key = `avatars/${randomUUID()}-${file.extname}`
+  public async bannerImageStore(file: MultipartFile): Promise<[string, string]> {
+    const fileName = `${randomUUID()}.${file.extname}`
+    const folder = 'news_banner'
+    const key = `${folder}/${fileName}`
     await file.moveToDisk(key)
     const url = await drive.use('s3').getUrl(key)
-    return url
+    return [key, url]
+  }
+
+  public async bannerImageDestroy(key: string | null): Promise<void> {
+    await drive.use('s3').delete(String(key))
   }
 }
