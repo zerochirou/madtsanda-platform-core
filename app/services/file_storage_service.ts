@@ -26,7 +26,7 @@ export class FileStorageService implements FileStorageServiceContract {
 
   public async teacherProfileStore(file: MultipartFile): Promise<[string, string]> {
     const fileName = `${randomUUID()}.${file.extname}`
-    const folder = 'profile_profile'
+    const folder = 'teacher_profile'
     const key = `${folder}/${fileName}`
     await file.moveToDisk(key)
     const url = await drive.use('s3').getUrl(key)
