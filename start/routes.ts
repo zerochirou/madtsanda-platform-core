@@ -84,6 +84,7 @@ router
           .prefix('/category')
 
         router.post('/', [controllers.News, 'submitNews'])
+        router.get('/limit', [controllers.News, 'showNewsWithLimit'])
         router.put('/:id', [controllers.News, 'editNews']).where('id', router.matchers.uuid())
         router.delete('/:id', [controllers.News, 'destroyNews']).where('id', router.matchers.uuid())
         router.get('/', [controllers.News, 'showAllNews'])

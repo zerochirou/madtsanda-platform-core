@@ -21,6 +21,13 @@ export default class NewsController {
     return ctx.serialize(NewsTransformer.transform(news))
   }
 
+  public async showNewsWithLimit(ctx: HttpContext) {
+    const limit = await ctx.request.input('limit')
+    const news = await this.newsService.findNewsWithLimit(limit)
+
+    return ctx.serialize(NewsTransformer.transform(news))
+  }
+
   public async showAllNewsPaginate(ctx: HttpContext) {
     const page = await ctx.request.input('page')
     const news = await this.newsService.findAllNewsPaginate(page)

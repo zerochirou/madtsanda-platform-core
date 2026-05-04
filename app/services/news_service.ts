@@ -7,6 +7,7 @@ import { ModelPaginatorContract } from '@adonisjs/lucid/types/model'
 
 interface NewsServiceContract {
   findAllNews(): Promise<News[]>
+  findNewsWithLimit(limit: number): Promise<News[]>
   findAllNewsPaginate(page: number, perPage: number): Promise<ModelPaginatorContract<News>>
   findNewsByCategoryId(categoryId: string): Promise<News[]>
   findNewsById(id: string): Promise<News>
@@ -22,6 +23,10 @@ export class NewsService implements NewsServiceContract {
 
   public async findAllNews(): Promise<News[]> {
     return await News.query().preload('newsCategory').preload('user')
+  }
+
+  public async findNewsWithLimit(limit: number): Promise<News[]> {
+    return await News.query().preload('newsCategory').limit(limit)
   }
 
   public async findNewsByCategoryId(categoryId: string): Promise<News[]> {
