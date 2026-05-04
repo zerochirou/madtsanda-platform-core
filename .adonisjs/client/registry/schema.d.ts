@@ -427,6 +427,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsById']>>>
     }
   }
+  'news.show_news_by_search': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news/search'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsBySearch']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsBySearch']>>>
+    }
+  }
   'news.show_news_by_category_id': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/news/:id/category'
@@ -497,6 +509,90 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['destroyResearchTag']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_tags_controller').default['destroyResearchTag']>>>
+    }
+  }
+  'research.show_all_research': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/research'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showAllResearch']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showAllResearch']>>>
+    }
+  }
+  'research.show_research_by_id': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/research/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showResearchById']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showResearchById']>>>
+    }
+  }
+  'research.show_research_by_search': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/research/search'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showResearchBySearch']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showResearchBySearch']>>>
+    }
+  }
+  'research.submit_research': {
+    methods: ["POST"]
+    pattern: '/api/v1/research'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/research').createResearchValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/research').createResearchValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['submitResearch']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['submitResearch']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'research.edit_research': {
+    methods: ["PUT"]
+    pattern: '/api/v1/research/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/research').updateResearchValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/research').updateResearchValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['editResearch']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['editResearch']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'research.show_research_by_user_id': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/research/user/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showResearchByUserId']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showResearchByUserId']>>>
+    }
+  }
+  'research.destroy_research': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/research/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['destroyResearch']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['destroyResearch']>>>
     }
   }
 }

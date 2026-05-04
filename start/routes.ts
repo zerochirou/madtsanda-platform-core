@@ -89,6 +89,7 @@ router
         router.get('/', [controllers.News, 'showAllNews'])
         router.get('/paginate', [controllers.News, 'showAllNewsPaginate'])
         router.get('/:id', [controllers.News, 'showNewsById']).where('id', router.matchers.uuid())
+        router.get('/search', [controllers.News, 'showNewsBySearch'])
         router
           .get('/:id/category', [controllers.News, 'showNewsByCategoryId'])
           .where('id', router.matchers.uuid())
@@ -112,6 +113,21 @@ router
               .where('id', router.matchers.uuid())
           })
           .prefix('/tag')
+        router.get('/', [controllers.Research, 'showAllResearch'])
+        router
+          .get('/:id', [controllers.Research, 'showResearchById'])
+          .where('id', router.matchers.uuid())
+        router.get('/search', [controllers.Research, 'showResearchBySearch'])
+        router.post('/', [controllers.Research, 'submitResearch'])
+        router
+          .put('/:id', [controllers.Research, 'editResearch'])
+          .where('id', router.matchers.uuid())
+        router
+          .get('/user/:id', [controllers.Research, 'showResearchByUserId'])
+          .where('id', router.matchers.uuid())
+        router
+          .delete('/:id', [controllers.Research, 'destroyResearch'])
+          .where('id', router.matchers.uuid())
       })
       .prefix('/research')
   })

@@ -8,8 +8,9 @@ export const controllers = {
   HealthChecks: () => import('#controllers/health_checks_controller'),
   NewsCategories: () => import('#controllers/news_categories_controller'),
   News: () => import('#controllers/news_controller'),
+  Research: () => import('#controllers/research_controller'),
+  ResearchTags: () => import('#controllers/research_tags_controller'),
   Students: () => import('#controllers/students_controller'),
   Teachers: () => import('#controllers/teachers_controller'),
   Users: () => import('#controllers/users_controller'),
-  ResearchTags: () => import('#controllers/research_tags_controller'),
 }

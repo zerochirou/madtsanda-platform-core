@@ -9,7 +9,6 @@ import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { randomUUID } from 'node:crypto'
 import Student from './student.ts'
 import Teacher from './teacher.ts'
-import Annnouncement from './annnouncement.ts'
 import Research from './research.ts'
 
 export default class User extends compose(UserSchema, withAuthFinder(hash)) {
@@ -29,9 +28,6 @@ export default class User extends compose(UserSchema, withAuthFinder(hash)) {
 
   @hasMany(() => Teacher)
   declare teacher: HasMany<typeof Teacher>
-
-  @hasMany(() => Annnouncement)
-  declare announcement: HasMany<typeof Annnouncement>
 
   @hasMany(() => News)
   declare news: HasMany<typeof News>

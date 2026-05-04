@@ -7,10 +7,11 @@
 import type { InferData, InferVariants } from '@adonisjs/core/types/transformers'
 import type NewsCategoryTransformer from '#transformers/news_category_transformer'
 import type NewsTransformer from '#transformers/news_transformer'
+import type ResearchTagTransformer from '#transformers/research_tag_transformer'
+import type ResearchTransformer from '#transformers/research_transformer'
 import type StudentTransformer from '#transformers/student_transformer'
 import type TeacherTransformer from '#transformers/teacher_transformer'
 import type UserTransformer from '#transformers/user_transformer'
-import type ResearchTagTransformer from '#transformers/research_tag_transformer'
 
 export namespace Data {
   export type NewsCategory = InferData<NewsCategoryTransformer>
@@ -20,6 +21,14 @@ export namespace Data {
   export type News = InferData<NewsTransformer>
   export namespace News {
     export type Variants = InferVariants<NewsTransformer>
+  }
+  export type ResearchTag = InferData<ResearchTagTransformer>
+  export namespace ResearchTag {
+    export type Variants = InferVariants<ResearchTagTransformer>
+  }
+  export type Research = InferData<ResearchTransformer>
+  export namespace Research {
+    export type Variants = InferVariants<ResearchTransformer>
   }
   export type Student = InferData<StudentTransformer>
   export namespace Student {
@@ -32,9 +41,5 @@ export namespace Data {
   export type User = InferData<UserTransformer>
   export namespace User {
     export type Variants = InferVariants<UserTransformer>
-  }
-  export type ResearchTag = InferData<ResearchTagTransformer>
-  export namespace ResearchTag {
-    export type Variants = InferVariants<ResearchTagTransformer>
   }
 }
