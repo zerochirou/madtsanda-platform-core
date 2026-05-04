@@ -186,6 +186,12 @@ const routes = {
     tokens: [{"old":"/api/v1/news","type":0,"val":"api","end":""},{"old":"/api/v1/news","type":0,"val":"v1","end":""},{"old":"/api/v1/news","type":0,"val":"news","end":""}],
     types: placeholder as Registry['news.submit_news']['types'],
   },
+  'news.show_news_with_limit': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/news/limit',
+    tokens: [{"old":"/api/v1/news/limit","type":0,"val":"api","end":""},{"old":"/api/v1/news/limit","type":0,"val":"v1","end":""},{"old":"/api/v1/news/limit","type":0,"val":"news","end":""},{"old":"/api/v1/news/limit","type":0,"val":"limit","end":""}],
+    types: placeholder as Registry['news.show_news_with_limit']['types'],
+  },
   'news.edit_news': {
     methods: ["PUT"],
     pattern: '/api/v1/news/:id',

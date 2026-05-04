@@ -367,6 +367,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['submitNews']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'news.show_news_with_limit': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/news/limit'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsWithLimit']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/news_controller').default['showNewsWithLimit']>>>
+    }
+  }
   'news.edit_news': {
     methods: ["PUT"]
     pattern: '/api/v1/news/:id'

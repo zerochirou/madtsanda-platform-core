@@ -45,6 +45,7 @@ export interface ApiDefinition {
   }
   news: {
     submitNews: typeof routes['news.submit_news']
+    showNewsWithLimit: typeof routes['news.show_news_with_limit']
     editNews: typeof routes['news.edit_news']
     destroyNews: typeof routes['news.destroy_news']
     showAllNews: typeof routes['news.show_all_news']
