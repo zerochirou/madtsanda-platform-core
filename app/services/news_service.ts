@@ -26,11 +26,19 @@ export class NewsService implements NewsServiceContract {
   }
 
   public async findNewsWithLimit(limit: number): Promise<News[]> {
-    return await News.query().preload('newsCategory').limit(limit)
+    return await News.query()
+      .preload('newsCategory')
+      .preload('user')
+      .limit(limit)
+      .orderBy('pin', 'desc')
+      .orderBy('createdAt', 'desc')
   }
 
   public async findNewsByCategoryId(categoryId: string): Promise<News[]> {
-    return await News.query().where('category_id', categoryId)
+    return await News.query()
+      .where('category_id', categoryId)
+      .preload('newsCategory')
+      .preload('user')
   }
 
   public async findNewsById(id: string): Promise<News> {
@@ -41,7 +49,12 @@ export class NewsService implements NewsServiceContract {
     page: number,
     perPage: number = 10
   ): Promise<ModelPaginatorContract<News>> {
-    const news = await News.query().preload('newsCategory').preload('user').paginate(page, perPage)
+    const news = await News.query()
+      .preload('newsCategory')
+      .preload('user')
+      .orderBy('pin', 'desc')
+      .orderBy('createdAt', 'desc')
+      .paginate(page, perPage)
     return news
   }
 

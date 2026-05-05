@@ -5,7 +5,7 @@ const createNewsValidator = vine.create({
   content: vine.string(),
   pin: vine.boolean(),
   image: vine.file({
-    size: '10mb',
+    size: '30mb',
     extnames: ['jpg', 'png', 'jpeg'],
   }),
   userId: vine.string(),
@@ -18,7 +18,7 @@ const updateNewsValidator = vine.create({
   pin: vine.boolean().optional(),
   image: vine
     .file({
-      size: '2mb',
+      size: '30mb',
       extnames: ['jpg', 'png', 'jpeg'],
     })
     .optional(),
