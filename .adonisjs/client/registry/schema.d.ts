@@ -103,6 +103,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth_controller').default['logout']>>>
     }
   }
+  'auth.me': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/auth/me'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth_controller').default['me']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth_controller').default['me']>>>
+    }
+  }
   'students.show_all_student': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/student'
@@ -113,6 +125,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/students_controller').default['showAllStudent']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/students_controller').default['showAllStudent']>>>
+    }
+  }
+  'students.show_student_with_token': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/student/token'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/students_controller').default['showStudentWithToken']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/students_controller').default['showStudentWithToken']>>>
     }
   }
   'students.show_student_by_id': {
@@ -233,6 +257,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/teachers_controller').default['showTeacherByUserID']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/teachers_controller').default['showTeacherByUserID']>>>
+    }
+  }
+  'teachers.show_teacher_with_token': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/teacher/token'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/teachers_controller').default['showTeacherWithToken']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/teachers_controller').default['showTeacherWithToken']>>>
     }
   }
   'teachers.submit_teacher': {

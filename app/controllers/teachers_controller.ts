@@ -20,6 +20,13 @@ export default class TeachersController {
     return ctx.serialize(TeacherTransformer.transform(teacher))
   }
 
+  public async showTeacherWithToken(ctx: HttpContext) {
+    const { id } = ctx.auth.getUserOrFail()
+    const teacher = await this.teacherService.getTeacherByUserID(id)
+
+    return ctx.serialize(TeacherTransformer.transform(teacher))
+  }
+
   public async showTeacherByUserID(ctx: HttpContext) {
     const id = ctx.request.param('id')
     const teacher = await this.teacherService.getTeacherByUserID(id)

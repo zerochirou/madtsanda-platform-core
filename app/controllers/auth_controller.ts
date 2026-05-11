@@ -26,4 +26,8 @@ export default class AuthController {
       message: 'Logout successfully',
     })
   }
+
+  async me({ auth, serialize }: HttpContext) {
+    return serialize(UserTransformer.transform(auth.getUserOrFail()))
+  }
 }

@@ -24,12 +24,14 @@ router
       .group(() => {
         router.post('/login', [controllers.Auth, 'login'])
         router.delete('/logout', [controllers.Auth, 'logout']).use(middleware.auth())
+        router.get('/me', [controllers.Auth, 'me']).use(middleware.auth())
       })
       .prefix('auth')
 
     router
       .group(() => {
         router.get('/', [controllers.Students, 'showAllStudent'])
+        router.get('/token', [controllers.Students, 'showStudentWithToken'])
         router
           .get('/:id', [controllers.Students, 'showStudentByID'])
           .where('id', router.matchers.uuid())
@@ -57,8 +59,13 @@ router
     router
       .group(() => {
         router.get('/', [controllers.Teachers, 'showAllTeacher'])
-        router.get('/:id', [controllers.Teachers, 'showTeacherByID'])
-        router.get('/user/:id', [controllers.Teachers, 'showTeacherByUserID'])
+        router
+          .get('/:id', [controllers.Teachers, 'showTeacherByID'])
+          .where('id', router.matchers.uuid())
+        router
+          .get('/user/:id', [controllers.Teachers, 'showTeacherByUserID'])
+          .where('id', router.matchers.uuid())
+        router.get('/token', [controllers.Teachers, 'showTeacherWithToken'])
         router
           .group(() => {
             router.post('/', [controllers.Teachers, 'submitTeacher'])

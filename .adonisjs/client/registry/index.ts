@@ -54,11 +54,23 @@ const routes = {
     tokens: [{"old":"/api/v1/auth/logout","type":0,"val":"api","end":""},{"old":"/api/v1/auth/logout","type":0,"val":"v1","end":""},{"old":"/api/v1/auth/logout","type":0,"val":"auth","end":""},{"old":"/api/v1/auth/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['auth.logout']['types'],
   },
+  'auth.me': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/auth/me',
+    tokens: [{"old":"/api/v1/auth/me","type":0,"val":"api","end":""},{"old":"/api/v1/auth/me","type":0,"val":"v1","end":""},{"old":"/api/v1/auth/me","type":0,"val":"auth","end":""},{"old":"/api/v1/auth/me","type":0,"val":"me","end":""}],
+    types: placeholder as Registry['auth.me']['types'],
+  },
   'students.show_all_student': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/student',
     tokens: [{"old":"/api/v1/student","type":0,"val":"api","end":""},{"old":"/api/v1/student","type":0,"val":"v1","end":""},{"old":"/api/v1/student","type":0,"val":"student","end":""}],
     types: placeholder as Registry['students.show_all_student']['types'],
+  },
+  'students.show_student_with_token': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/student/token',
+    tokens: [{"old":"/api/v1/student/token","type":0,"val":"api","end":""},{"old":"/api/v1/student/token","type":0,"val":"v1","end":""},{"old":"/api/v1/student/token","type":0,"val":"student","end":""},{"old":"/api/v1/student/token","type":0,"val":"token","end":""}],
+    types: placeholder as Registry['students.show_student_with_token']['types'],
   },
   'students.show_student_by_id': {
     methods: ["GET","HEAD"],
@@ -119,6 +131,12 @@ const routes = {
     pattern: '/api/v1/teacher/user/:id',
     tokens: [{"old":"/api/v1/teacher/user/:id","type":0,"val":"api","end":""},{"old":"/api/v1/teacher/user/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/teacher/user/:id","type":0,"val":"teacher","end":""},{"old":"/api/v1/teacher/user/:id","type":0,"val":"user","end":""},{"old":"/api/v1/teacher/user/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['teachers.show_teacher_by_user_id']['types'],
+  },
+  'teachers.show_teacher_with_token': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/teacher/token',
+    tokens: [{"old":"/api/v1/teacher/token","type":0,"val":"api","end":""},{"old":"/api/v1/teacher/token","type":0,"val":"v1","end":""},{"old":"/api/v1/teacher/token","type":0,"val":"teacher","end":""},{"old":"/api/v1/teacher/token","type":0,"val":"token","end":""}],
+    types: placeholder as Registry['teachers.show_teacher_with_token']['types'],
   },
   'teachers.submit_teacher': {
     methods: ["POST"],

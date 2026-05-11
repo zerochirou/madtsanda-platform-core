@@ -12,7 +12,9 @@ export type ScannedRoutes = {
     'users.destroy_user': { paramsTuple?: []; params?: {} }
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.logout': { paramsTuple?: []; params?: {} }
+    'auth.me': { paramsTuple?: []; params?: {} }
     'students.show_all_student': { paramsTuple?: []; params?: {} }
+    'students.show_student_with_token': { paramsTuple?: []; params?: {} }
     'students.show_student_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'students.show_student_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'students.edit_student': { paramsTuple?: []; params?: {} }
@@ -23,6 +25,7 @@ export type ScannedRoutes = {
     'teachers.show_all_teacher': { paramsTuple?: []; params?: {} }
     'teachers.show_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.show_teacher_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'teachers.show_teacher_with_token': { paramsTuple?: []; params?: {} }
     'teachers.submit_teacher': { paramsTuple?: []; params?: {} }
     'teachers.edit_teacher': { paramsTuple?: []; params?: {} }
     'teachers.destroy_teacher': { paramsTuple?: []; params?: {} }
@@ -59,12 +62,15 @@ export type ScannedRoutes = {
     'health_checks.live': { paramsTuple?: []; params?: {} }
     'health_checks.ready': { paramsTuple?: []; params?: {} }
     'users.show_all_user': { paramsTuple?: []; params?: {} }
+    'auth.me': { paramsTuple?: []; params?: {} }
     'students.show_all_student': { paramsTuple?: []; params?: {} }
+    'students.show_student_with_token': { paramsTuple?: []; params?: {} }
     'students.show_student_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'students.show_student_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.show_all_teacher': { paramsTuple?: []; params?: {} }
     'teachers.show_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.show_teacher_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'teachers.show_teacher_with_token': { paramsTuple?: []; params?: {} }
     'news_categories.show_all_news_category': { paramsTuple?: []; params?: {} }
     'news_categories.show_news_category_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news.show_news_with_limit': { paramsTuple?: []; params?: {} }
@@ -84,12 +90,15 @@ export type ScannedRoutes = {
     'health_checks.live': { paramsTuple?: []; params?: {} }
     'health_checks.ready': { paramsTuple?: []; params?: {} }
     'users.show_all_user': { paramsTuple?: []; params?: {} }
+    'auth.me': { paramsTuple?: []; params?: {} }
     'students.show_all_student': { paramsTuple?: []; params?: {} }
+    'students.show_student_with_token': { paramsTuple?: []; params?: {} }
     'students.show_student_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'students.show_student_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.show_all_teacher': { paramsTuple?: []; params?: {} }
     'teachers.show_teacher_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'teachers.show_teacher_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'teachers.show_teacher_with_token': { paramsTuple?: []; params?: {} }
     'news_categories.show_all_news_category': { paramsTuple?: []; params?: {} }
     'news_categories.show_news_category_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'news.show_news_with_limit': { paramsTuple?: []; params?: {} }

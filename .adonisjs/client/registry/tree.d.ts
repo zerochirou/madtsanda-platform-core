@@ -15,9 +15,11 @@ export interface ApiDefinition {
   auth: {
     login: typeof routes['auth.login']
     logout: typeof routes['auth.logout']
+    me: typeof routes['auth.me']
   }
   students: {
     showAllStudent: typeof routes['students.show_all_student']
+    showStudentWithToken: typeof routes['students.show_student_with_token']
     showStudentById: typeof routes['students.show_student_by_id']
     showStudentByUserId: typeof routes['students.show_student_by_user_id']
     editStudent: typeof routes['students.edit_student']
@@ -30,6 +32,7 @@ export interface ApiDefinition {
     showAllTeacher: typeof routes['teachers.show_all_teacher']
     showTeacherById: typeof routes['teachers.show_teacher_by_id']
     showTeacherByUserId: typeof routes['teachers.show_teacher_by_user_id']
+    showTeacherWithToken: typeof routes['teachers.show_teacher_with_token']
     submitTeacher: typeof routes['teachers.submit_teacher']
     editTeacher: typeof routes['teachers.edit_teacher']
     destroyTeacher: typeof routes['teachers.destroy_teacher']
