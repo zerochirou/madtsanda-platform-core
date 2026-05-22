@@ -1,8 +1,8 @@
 import vine from '@vinejs/vine'
 
 const createResearchValidator = vine.create({
-  title: vine.string(),
-  abstrack: vine.string(),
+  title: vine.string().unique({ table: 'research', column: 'title' }),
+  abstrack: vine.string().unique({ table: 'research', column: 'abstrack' }),
   document: vine.file({
     size: '50mb',
     extnames: ['pdf', 'doc', 'docx', '.tex'],
