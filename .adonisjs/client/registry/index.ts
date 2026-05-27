@@ -80,8 +80,8 @@ const routes = {
   },
   'students.show_student_by_user_id': {
     methods: ["GET","HEAD"],
-    pattern: '/api/v1/student/user/:id',
-    tokens: [{"old":"/api/v1/student/user/:id","type":0,"val":"api","end":""},{"old":"/api/v1/student/user/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/student/user/:id","type":0,"val":"student","end":""},{"old":"/api/v1/student/user/:id","type":0,"val":"user","end":""},{"old":"/api/v1/student/user/:id","type":1,"val":"id","end":""}],
+    pattern: '/api/v1/student/student/:id',
+    tokens: [{"old":"/api/v1/student/student/:id","type":0,"val":"api","end":""},{"old":"/api/v1/student/student/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/student/student/:id","type":0,"val":"student","end":""},{"old":"/api/v1/student/student/:id","type":0,"val":"student","end":""},{"old":"/api/v1/student/student/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['students.show_student_by_user_id']['types'],
   },
   'students.edit_student': {
