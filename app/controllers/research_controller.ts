@@ -1,3 +1,5 @@
+import { researcherAccessControll } from '#abilities/main'
+import Research from '#models/research'
 import { ResearchService } from '#services/research_service'
 import ResearchTransformer from '#transformers/research_transformer'
 import { createResearchValidator, updateResearchValidator } from '#validators/research'
@@ -7,6 +9,12 @@ import type { HttpContext } from '@adonisjs/core/http'
 @inject()
 export default class ResearchController {
   constructor(protected researchService: ResearchService) {}
+
+  private async adminAccessControll(ctx: HttpContext, post: Research) {
+    if (await ctx.bouncer.denies(researcherAccessControll, post)) {
+      return ctx.response.forbidden('You cannot edit this post')
+    }
+  }
 
   public async submitResearch(ctx: HttpContext) {
     const payload = await ctx.request.validateUsing(createResearchValidator)
@@ -37,7 +45,6 @@ export default class ResearchController {
   }
 
   public async showResearchByUserId(ctx: HttpContext) {
-    // Pastikan nama parameter di route ('id' atau 'userId') sesuai dengan yang di-binding
     const userId = ctx.request.param('id')
     const research = await this.researchService.findResearchByUserId(userId)
 
@@ -47,6 +54,10 @@ export default class ResearchController {
   public async editResearch(ctx: HttpContext) {
     const id = ctx.request.param('id')
     const payload = await ctx.request.validateUsing(updateResearchValidator)
+    const post = await this.researchService.findResearchById(id)
+
+    await this.adminAccessControll(ctx, post)
+
     const updatedResearch = await this.researchService.updateResearch(id, payload)
 
     return ctx.serialize(ResearchTransformer.transform(updatedResearch))

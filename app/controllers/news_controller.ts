@@ -1,3 +1,4 @@
+import { adminAccessControll } from '#abilities/main'
 import { NewsService } from '#services/news_service'
 import NewsTransformer from '#transformers/news_transformer'
 import { createNewsValidator, updateNewsValidator } from '#validators/news'
@@ -8,9 +9,17 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class NewsController {
   constructor(protected newsService: NewsService) {}
 
+  private async adminAccessControll(ctx: HttpContext) {
+    if (await ctx.bouncer.denies(adminAccessControll)) {
+      return ctx.response.forbidden('You cannot edit this')
+    }
+  }
+
   public async submitNews(ctx: HttpContext) {
     const payload = await ctx.request.validateUsing(createNewsValidator)
     const news = await this.newsService.createNews(payload)
+
+    await this.adminAccessControll(ctx)
 
     return ctx.serialize(NewsTransformer.transform(news))
   }
@@ -62,12 +71,16 @@ export default class NewsController {
     const payload = await ctx.request.validateUsing(updateNewsValidator)
     const updatedNews = await this.newsService.updateNews(id, payload)
 
+    await this.adminAccessControll(ctx)
+
     return ctx.serialize(NewsTransformer.transform(updatedNews))
   }
 
   public async destroyNews(ctx: HttpContext) {
     const id = await ctx.request.param('id')
     await this.newsService.deleteNews(id)
+
+    await this.adminAccessControll(ctx)
 
     return ctx.serialize({
       message: 'news wasa deleted',

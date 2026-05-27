@@ -3,10 +3,17 @@ import { StudentService } from '#services/student_service'
 import { inject } from '@adonisjs/core'
 import StudentTransformer from '#transformers/student_transformer'
 import { createStudentValidator, updateStudentValidator } from '#validators/student'
+import { adminAccessControll } from '#abilities/main'
 
 @inject()
 export default class StudentsController {
   constructor(protected studentService: StudentService) {}
+
+  private async adminAccessControll(ctx: HttpContext) {
+    if (await ctx.bouncer.denies(adminAccessControll)) {
+      return ctx.response.forbidden('You cannot edit this')
+    }
+  }
 
   public async showAllStudent(ctx: HttpContext) {
     const students = await this.studentService.getAllStudent()
@@ -39,6 +46,8 @@ export default class StudentsController {
     const payload = await ctx.request.validateUsing(createStudentValidator)
     const student = await this.studentService.createStudent(payload)
 
+    await this.adminAccessControll(ctx)
+
     return ctx.serialize(StudentTransformer.transform(student))
   }
 
@@ -46,6 +55,8 @@ export default class StudentsController {
     const { id } = ctx.auth.getUserOrFail()
     const payload = await ctx.request.validateUsing(updateStudentValidator)
     const updatedStudent = await this.studentService.updateStudent(id, payload)
+
+    await this.adminAccessControll(ctx)
 
     return ctx.serialize(StudentTransformer.transform(updatedStudent))
   }
@@ -55,12 +66,16 @@ export default class StudentsController {
     const payload = await ctx.request.validateUsing(updateStudentValidator)
     const updatedStudent = await this.studentService.updateStudentByUserID(id, payload)
 
+    await this.adminAccessControll(ctx)
+
     return ctx.serialize(StudentTransformer.transform(updatedStudent))
   }
 
   public async destroyStudent(ctx: HttpContext) {
     const { id } = ctx.auth.getUserOrFail()
     await this.studentService.destroyStudent(id)
+
+    await this.adminAccessControll(ctx)
 
     return ctx.serialize({
       message: 'student was deleted',
@@ -70,6 +85,8 @@ export default class StudentsController {
   public async destroyStudentByID(ctx: HttpContext) {
     const id = await ctx.request.param('id')
     await this.studentService.destroyStudent(id)
+
+    await this.adminAccessControll(ctx)
 
     return ctx.serialize({
       message: 'student was deleted',
