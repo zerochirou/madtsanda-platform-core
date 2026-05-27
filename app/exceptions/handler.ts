@@ -17,17 +17,15 @@ export default class HttpExceptionHandler extends ExceptionHandler {
   async handle(error: unknown, ctx: HttpContext) {
     if (error instanceof errors.E_VALIDATION_ERROR) {
       return ctx.response.status(422).send({
-        errors: error.messages
+        errors: error.messages,
       })
     }
 
-    const err = error as any;
-    const status = err.status || 500;
-    const message = err.message || 'Internal Server Error';
+    const err = error as any
+    const status = err.status || 500
+    const message = err.message || 'Internal Server Error'
 
-    return ctx.response.status(status).send(
-      ResponseFormatter.error(message, status)
-    )
+    return ctx.response.status(status).send(ResponseFormatter.error(message, status))
   }
 
   /**

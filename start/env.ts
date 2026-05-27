@@ -40,4 +40,15 @@ export default await Env.create(new URL('../', import.meta.url), {
   S3_BUCKET: Env.schema.string(),
   S3_REGION: Env.schema.string(),
   S3_ENDPOINT: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the limiter package
+  |----------------------------------------------------------
+  */
+  LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const),
+
+  REDIS_HOST: Env.schema.string({ format: 'host' }),
+  REDIS_PORT: Env.schema.number(),
+  REDIS_PASSWORD: Env.schema.secret.optional()
 })

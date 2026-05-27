@@ -10,7 +10,15 @@ export default class AuthController {
 
   async login(ctx: HttpContext) {
     const payload = await ctx.request.validateUsing(createLoginValidator)
-    const [token, user] = await this.authService.createAccess(payload)
+    const { token, user, success, message } = await this.authService.createAccess(payload)
+
+    if (!success || !token || !user) {
+      ctx.response.status(401)
+      return ctx.serialize({
+        message: message ?? 'Invalid credentials',
+        code: 401,
+      })
+    }
 
     return ctx.serialize({
       token: token.value!.release(),

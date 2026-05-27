@@ -153,7 +153,7 @@ export interface Registry {
   }
   'students.show_student_by_user_id': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/student/user/:id'
+    pattern: '/api/v1/student/student/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
