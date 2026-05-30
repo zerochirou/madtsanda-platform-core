@@ -3,6 +3,7 @@ import { FileStorageService } from './file_storage_service.ts'
 import Research from '#models/research'
 import { Infer } from '@vinejs/vine/types'
 import { createResearchValidator, updateResearchValidator } from '#validators/research'
+import { ModelPaginatorContract } from '@adonisjs/lucid/types/model'
 
 interface ResearchServiceContract {
   createResearch(data: Infer<typeof createResearchValidator>): Promise<Research>
@@ -11,6 +12,7 @@ interface ResearchServiceContract {
   findAllResearch(): Promise<Research[]>
   findResearchById(id: string): Promise<Research>
   findResearchBySearch(query: string): Promise<Research[]>
+  findResearchByPaginate(page: number): Promise<Research[]>
   findResearchByUserId(id: string): Promise<Research[]>
 }
 
@@ -83,6 +85,18 @@ export class ResearchService implements ResearchServiceContract {
       )
       .whereRaw('MATCH(title, abstrack) AGAINST(? IN NATURAL LANGUAGE MODE)', [query])
       .orderBy('relevance', 'desc')
+
+    return research
+  }
+
+  public async findResearchByPaginate(
+    page: number,
+    perPage: number = 6
+  ): Promise<ModelPaginatorContract<Research>> {
+    const research = await Research.query()
+      .preload('user')
+      .preload('researchTag')
+      .paginate(page, perPage)
 
     return research
   }

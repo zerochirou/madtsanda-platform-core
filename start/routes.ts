@@ -148,6 +148,7 @@ router
           })
           .prefix('/tag')
         router.get('/', [controllers.Research, 'showAllResearch'])
+        router.get('/paginate', [controllers.Research, 'showAllResearchByPaginate'])
         router
           .get('/:id', [controllers.Research, 'showResearchById'])
           .where('id', router.matchers.uuid())

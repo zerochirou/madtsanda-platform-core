@@ -16,6 +16,14 @@ export default class ResearchController {
     }
   }
 
+  public async showAllResearchByPaginate(ctx: HttpContext) {
+    const page = ctx.request.input('page')
+    const research = await this.researchService.findResearchByPaginate(page)
+    const metadata = research.getMeta()
+
+    return ctx.serialize(ResearchTransformer.paginate(research, metadata))
+  }
+
   public async submitResearch(ctx: HttpContext) {
     const payload = await ctx.request.validateUsing(createResearchValidator)
     const research = await this.researchService.createResearch(payload)

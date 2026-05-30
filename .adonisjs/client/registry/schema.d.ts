@@ -571,6 +571,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showAllResearch']>>>
     }
   }
+  'research.show_all_research_by_paginate': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/research/paginate'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showAllResearchByPaginate']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['showAllResearchByPaginate']>>>
+    }
+  }
   'research.show_research_by_id': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/research/:id'

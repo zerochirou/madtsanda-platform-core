@@ -66,6 +66,7 @@ export interface ApiDefinition {
   }
   research: {
     showAllResearch: typeof routes['research.show_all_research']
+    showAllResearchByPaginate: typeof routes['research.show_all_research_by_paginate']
     showResearchById: typeof routes['research.show_research_by_id']
     showResearchBySearch: typeof routes['research.show_research_by_search']
     submitResearch: typeof routes['research.submit_research']

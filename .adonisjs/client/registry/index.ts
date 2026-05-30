@@ -288,6 +288,12 @@ const routes = {
     tokens: [{"old":"/api/v1/research","type":0,"val":"api","end":""},{"old":"/api/v1/research","type":0,"val":"v1","end":""},{"old":"/api/v1/research","type":0,"val":"research","end":""}],
     types: placeholder as Registry['research.show_all_research']['types'],
   },
+  'research.show_all_research_by_paginate': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/research/paginate',
+    tokens: [{"old":"/api/v1/research/paginate","type":0,"val":"api","end":""},{"old":"/api/v1/research/paginate","type":0,"val":"v1","end":""},{"old":"/api/v1/research/paginate","type":0,"val":"research","end":""},{"old":"/api/v1/research/paginate","type":0,"val":"paginate","end":""}],
+    types: placeholder as Registry['research.show_all_research_by_paginate']['types'],
+  },
   'research.show_research_by_id': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/research/:id',
