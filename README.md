@@ -1,5 +1,5 @@
-
 # Zensedotcore
+
 > sebuah layanan peladen yang digunakan sebagai sistem inti dari madtsanda platform
 
 ---
@@ -23,6 +23,7 @@
 **Core Service** merupakan aplikasi backend yang terstruktur dengan baik dan mengikuti **arsitektur modular berbasis fitur**. Pendekatan ini menekankan pemisahan tanggung jawab, keamanan tipe, serta pengalaman pengembang yang optimal.
 
 Implementasi saat ini mencakup modul `account` yang lengkap sebagai contoh pola yang direkomendasikan untuk semua modul di masa mendatang:
+
 - `controller` → menangani lapisan HTTP
 - `services` → berisi logika bisnis
 - `validator` + `req/res` → pengetikan kuat dan validasi (DTO)
@@ -48,17 +49,17 @@ Struktur ini memudahkan penskalaan, pengujian, dan pemeliharaan kode saat sistem
 
 ## Tumpukan Teknologi
 
-| Lapisan                | Teknologi               | Tujuan                                              |
-|------------------------|-------------------------|-----------------------------------------------------|
-| **Runtime**            | Bun                     | Runtime JavaScript/TypeScript yang sangat cepat     |
-| **Bahasa**             | TypeScript 5+           | Keamanan tipe dan fitur JavaScript modern           |
-| **Kerangka HTTP**      | Adonis  (atau Core HTTP)| Kerangka web yang ringan dan berkinerja tinggi      |
-| **ORM**                | Drizzle ORM             | SQL berbasis tipe dengan pengalaman pengembang yang sangat baik |
-| **Validasi**           | Zod (direkomendasikan)  | Validasi permintaan runtime & DTO                   |
-| **Basis Data**         | PostgreSQL (default)    | Basis data relasional utama                         |
-| **Kontainerisasi**     | Docker + Compose        | Lingkungan pengembangan lokal & produksi yang konsisten |
-| **Pengelola Paket**    | Bun                     | Pengelolaan dependensi & skrip yang cepat           |
-| **Konfigurasi**        | drizzle.config.ts       | Pengelolaan skema basis data & migrasi              |
+| Lapisan             | Teknologi               | Tujuan                                                          |
+| ------------------- | ----------------------- | --------------------------------------------------------------- |
+| **Runtime**         | Bun                     | Runtime JavaScript/TypeScript yang sangat cepat                 |
+| **Bahasa**          | TypeScript 5+           | Keamanan tipe dan fitur JavaScript modern                       |
+| **Kerangka HTTP**   | Adonis (atau Core HTTP) | Kerangka web yang ringan dan berkinerja tinggi                  |
+| **ORM**             | Drizzle ORM             | SQL berbasis tipe dengan pengalaman pengembang yang sangat baik |
+| **Validasi**        | Zod (direkomendasikan)  | Validasi permintaan runtime & DTO                               |
+| **Basis Data**      | PostgreSQL (default)    | Basis data relasional utama                                     |
+| **Kontainerisasi**  | Docker + Compose        | Lingkungan pengembangan lokal & produksi yang konsisten         |
+| **Pengelola Paket** | Bun                     | Pengelolaan dependensi & skrip yang cepat                       |
+| **Konfigurasi**     | drizzle.config.ts       | Pengelolaan skema basis data & migrasi                          |
 
 ---
 
@@ -190,13 +191,13 @@ GOOGLE_CLIET_SECRET=
 
 ## Skrip yang Tersedia
 
-| Perintah               | Deskripsi                                      |
-|------------------------|------------------------------------------------|
-| `bun run dev`          | Menjalankan server pengembangan dengan hot reload |
-| `bun run build`        | Membangun untuk produksi                       |
-| `bun run start`        | Menjalankan server produksi                    |
-| `bun db:...`           | Perintah skema & migrasi basis data            |
-| `bun test`             | Menjalankan rangkaian pengujian (jika dikonfigurasi) |
+| Perintah        | Deskripsi                                            |
+| --------------- | ---------------------------------------------------- |
+| `bun run dev`   | Menjalankan server pengembangan dengan hot reload    |
+| `bun run build` | Membangun untuk produksi                             |
+| `bun run start` | Menjalankan server produksi                          |
+| `bun db:...`    | Perintah skema & migrasi basis data                  |
+| `bun test`      | Menjalankan rangkaian pengujian (jika dikonfigurasi) |
 
 ---
 
@@ -206,14 +207,14 @@ Kami secara ketat mengikuti **Conventional Commits** dan strategi percabangan ya
 
 ### Strategi Percabangan
 
-| Jenis Cabang          | Konvensi Penamaan               | Tujuan                                      |
-|-----------------------|---------------------------------|---------------------------------------------|
-| Produksi              | `main`                          | Kode stabil dan siap diterapkan             |
-| Pengembangan          | `develop`                       | Cabang integrasi (opsional)                 |
-| Fitur                 | `feature/<kebab-case-name>`     | Fitur baru                                  |
-| Perbaikan Bug         | `fix/<kebab-case-name>`         | Perbaikan bug                               |
-| Hotfix                | `hotfix/<name>`                 | Perbaikan mendesak produksi                 |
-| Pekerjaan / Refaktor  | `chore/<name>` atau `refactor/<name>` | Pemeliharaan, pembaruan dependensi, refaktor |
+| Jenis Cabang         | Konvensi Penamaan                     | Tujuan                                       |
+| -------------------- | ------------------------------------- | -------------------------------------------- |
+| Produksi             | `main`                                | Kode stabil dan siap diterapkan              |
+| Pengembangan         | `develop`                             | Cabang integrasi (opsional)                  |
+| Fitur                | `feature/<kebab-case-name>`           | Fitur baru                                   |
+| Perbaikan Bug        | `fix/<kebab-case-name>`               | Perbaikan bug                                |
+| Hotfix               | `hotfix/<name>`                       | Perbaikan mendesak produksi                  |
+| Pekerjaan / Refaktor | `chore/<name>` atau `refactor/<name>` | Pemeliharaan, pembaruan dependensi, refaktor |
 
 ### Konvensi Pesan Commit
 
