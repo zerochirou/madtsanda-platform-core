@@ -29,7 +29,7 @@ export default defineConfig({
     () => import('@adonisjs/core/commands'),
     () => import('@adonisjs/lucid/commands'),
     () => import('@adonisjs/session/commands'),
-    () => import('@adonisjs/bouncer/commands')
+    () => import('@adonisjs/bouncer/commands'),
   ],
 
   /*
@@ -58,7 +58,7 @@ export default defineConfig({
     () => import('@adonisjs/drive/drive_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
     () => import('@adonisjs/redis/redis_provider'),
-    () => import('@adonisjs/bouncer/bouncer_provider')
+    () => import('@adonisjs/bouncer/bouncer_provider'),
   ],
 
   /*
@@ -117,7 +117,7 @@ export default defineConfig({
         transformers: { enabled: true },
       }),
       generateRegistry(),
-      indexPolicies()
+      indexPolicies(),
     ],
   },
 })

@@ -1,12 +1,12 @@
-import { ModelPaginatorContract } from '@adonisjs/lucid/types/model'
+import { type ModelPaginatorContract } from '@adonisjs/lucid/types/model'
 
 export class ResponseFormatter {
   static success(data: any, meta: any = null) {
     return {
       data,
       meta,
-      error: null
-    };
+      error: null,
+    }
   }
 
   static error(message: string, code: string | number = 400, details: any = null) {
@@ -16,16 +16,16 @@ export class ResponseFormatter {
       error: {
         code,
         message,
-        details
-      }
-    };
+        details,
+      },
+    }
   }
 
   static paginate(paginator: ModelPaginatorContract<any>) {
     const json = paginator.toJSON()
     return {
       data: json.data,
-      metadata: json.meta
+      metadata: json.meta,
     }
   }
 }
