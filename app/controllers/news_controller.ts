@@ -11,15 +11,18 @@ export default class NewsController {
 
   private async adminAccessControll(ctx: HttpContext) {
     if (await ctx.bouncer.denies(adminAccessControll)) {
-      return ctx.response.forbidden('You cannot edit this')
+      ctx.response.forbidden('You cannot edit this')
+      return false
     }
+
+    return true
   }
 
   public async submitNews(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const payload = await ctx.request.validateUsing(createNewsValidator)
     const news = await this.newsService.createNews(payload)
-
-    await this.adminAccessControll(ctx)
 
     return ctx.serialize(NewsTransformer.transform(news))
   }
@@ -60,27 +63,32 @@ export default class NewsController {
   }
 
   public async showNewsBySearch(ctx: HttpContext) {
-    const query = await ctx.request.input('q')
+    const query = String(ctx.request.input('q') ?? ctx.request.input('query') ?? '').trim()
+
+    if (!query) {
+      return ctx.serialize(NewsTransformer.transform([]))
+    }
+
     const news = await this.newsService.findNewsBySearch(query)
 
     return ctx.serialize(NewsTransformer.transform(news))
   }
 
   public async editNews(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const id = await ctx.request.param('id')
     const payload = await ctx.request.validateUsing(updateNewsValidator)
     const updatedNews = await this.newsService.updateNews(id, payload)
-
-    await this.adminAccessControll(ctx)
 
     return ctx.serialize(NewsTransformer.transform(updatedNews))
   }
 
   public async destroyNews(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const id = await ctx.request.param('id')
     await this.newsService.deleteNews(id)
-
-    await this.adminAccessControll(ctx)
 
     return ctx.serialize({
       message: 'news wasa deleted',

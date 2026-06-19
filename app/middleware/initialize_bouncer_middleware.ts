@@ -5,6 +5,10 @@ import { Bouncer } from '@adonisjs/bouncer'
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 
+type EdgeView = {
+  share: (helpers: typeof Bouncer.prototype.edgeHelpers) => void
+}
+
 /**
  * Init bouncer middleware is used to create a bouncer instance
  * during an HTTP request
@@ -24,9 +28,8 @@ export default class InitializeBouncerMiddleware {
     /**
      * Share bouncer helpers with Edge templates.
      */
-    if ('view' in ctx) {
-      ctx.view.share(ctx.bouncer.edgeHelpers)
-    }
+    const view = (ctx as HttpContext & { view?: EdgeView }).view
+    view?.share(ctx.bouncer.edgeHelpers)
 
     return next()
   }

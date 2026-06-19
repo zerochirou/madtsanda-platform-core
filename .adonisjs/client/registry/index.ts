@@ -330,6 +330,36 @@ const routes = {
     tokens: [{"old":"/api/v1/research/:id","type":0,"val":"api","end":""},{"old":"/api/v1/research/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/research/:id","type":0,"val":"research","end":""},{"old":"/api/v1/research/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['research.destroy_research']['types'],
   },
+  'libraries.show_all_library': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/library',
+    tokens: [{"old":"/api/v1/library","type":0,"val":"api","end":""},{"old":"/api/v1/library","type":0,"val":"v1","end":""},{"old":"/api/v1/library","type":0,"val":"library","end":""}],
+    types: placeholder as Registry['libraries.show_all_library']['types'],
+  },
+  'libraries.show_library_by_id': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/library/:id',
+    tokens: [{"old":"/api/v1/library/:id","type":0,"val":"api","end":""},{"old":"/api/v1/library/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/library/:id","type":0,"val":"library","end":""},{"old":"/api/v1/library/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['libraries.show_library_by_id']['types'],
+  },
+  'libraries.submit_library': {
+    methods: ["POST"],
+    pattern: '/api/v1/library',
+    tokens: [{"old":"/api/v1/library","type":0,"val":"api","end":""},{"old":"/api/v1/library","type":0,"val":"v1","end":""},{"old":"/api/v1/library","type":0,"val":"library","end":""}],
+    types: placeholder as Registry['libraries.submit_library']['types'],
+  },
+  'libraries.edit_library': {
+    methods: ["PUT"],
+    pattern: '/api/v1/library/:id',
+    tokens: [{"old":"/api/v1/library/:id","type":0,"val":"api","end":""},{"old":"/api/v1/library/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/library/:id","type":0,"val":"library","end":""},{"old":"/api/v1/library/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['libraries.edit_library']['types'],
+  },
+  'libraries.destroy_library': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/library/:id',
+    tokens: [{"old":"/api/v1/library/:id","type":0,"val":"api","end":""},{"old":"/api/v1/library/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/library/:id","type":0,"val":"library","end":""},{"old":"/api/v1/library/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['libraries.destroy_library']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

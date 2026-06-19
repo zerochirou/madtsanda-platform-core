@@ -6,6 +6,7 @@
 export const controllers = {
   Auth: () => import('#controllers/auth_controller'),
   HealthChecks: () => import('#controllers/health_checks_controller'),
+  Libraries: () => import('#controllers/libraries_controller'),
   NewsCategories: () => import('#controllers/news_categories_controller'),
   News: () => import('#controllers/news_controller'),
   Research: () => import('#controllers/research_controller'),

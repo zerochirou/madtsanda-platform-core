@@ -11,11 +11,16 @@ export default class ResearchTagsController {
 
   private async adminAccessControll(ctx: HttpContext) {
     if (await ctx.bouncer.denies(adminAccessControll)) {
-      return ctx.response.forbidden('You cannot edit this')
+      ctx.response.forbidden('You cannot edit this')
+      return false
     }
+
+    return true
   }
 
   public async submitResearchTag(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const payload = await ctx.request.validateUsing(createResearchTagValidator)
     const researchTag = await this.researchTagService.createResearchTagService(payload)
 
@@ -36,20 +41,20 @@ export default class ResearchTagsController {
   }
 
   public async editResearchTag(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const id = ctx.request.param('id')
     const payload = await ctx.request.validateUsing(updateResearchTagValidator)
     const updatedResearchTag = await this.researchTagService.updateResearchTagService(id, payload)
-
-    await this.adminAccessControll(ctx)
 
     return ctx.serialize(ResearchTagTransformer.transform(updatedResearchTag))
   }
 
   public async destroyResearchTag(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const id = ctx.request.param('id')
     await this.researchTagService.destroyResearchTagService(id)
-
-    await this.adminAccessControll(ctx)
 
     return ctx.serialize({
       message: 'Research tag was deleted successfully',

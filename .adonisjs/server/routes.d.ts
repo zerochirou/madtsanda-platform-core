@@ -58,6 +58,11 @@ export type ScannedRoutes = {
     'research.edit_research': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research.show_research_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research.destroy_research': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'libraries.show_all_library': { paramsTuple?: []; params?: {} }
+    'libraries.show_library_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'libraries.submit_library': { paramsTuple?: []; params?: {} }
+    'libraries.edit_library': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'libraries.destroy_library': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'health_checks.live': { paramsTuple?: []; params?: {} }
@@ -87,6 +92,8 @@ export type ScannedRoutes = {
     'research.show_research_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research.show_research_by_search': { paramsTuple?: []; params?: {} }
     'research.show_research_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'libraries.show_all_library': { paramsTuple?: []; params?: {} }
+    'libraries.show_library_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'health_checks.live': { paramsTuple?: []; params?: {} }
@@ -116,6 +123,8 @@ export type ScannedRoutes = {
     'research.show_research_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research.show_research_by_search': { paramsTuple?: []; params?: {} }
     'research.show_research_by_user_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'libraries.show_all_library': { paramsTuple?: []; params?: {} }
+    'libraries.show_library_by_id': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'users.submit_user': { paramsTuple?: []; params?: {} }
@@ -126,6 +135,7 @@ export type ScannedRoutes = {
     'news.submit_news': { paramsTuple?: []; params?: {} }
     'research_tags.submit_research_tag': { paramsTuple?: []; params?: {} }
     'research.submit_research': { paramsTuple?: []; params?: {} }
+    'libraries.submit_library': { paramsTuple?: []; params?: {} }
   }
   PATCH: {
     'users.update_user': { paramsTuple?: []; params?: {} }
@@ -141,6 +151,7 @@ export type ScannedRoutes = {
     'news.destroy_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research_tags.destroy_research_tag': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research.destroy_research': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'libraries.destroy_library': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PUT: {
     'students.edit_student': { paramsTuple?: []; params?: {} }
@@ -151,6 +162,7 @@ export type ScannedRoutes = {
     'news.edit_news': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research_tags.edit_research_tag': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'research.edit_research': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'libraries.edit_library': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {
