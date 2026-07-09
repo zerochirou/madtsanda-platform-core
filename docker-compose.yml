@@ -1,6 +1,30 @@
 name: madtsanda_platform
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: madtsanda_platform_app
+    restart: unless-stopped
+    ports:
+      - '${PORT:-3333}:${PORT:-3333}'
+    env_file:
+      - .env
+    environment:
+      # Override hosts to use Docker service names
+      HOST: 0.0.0.0
+      DB_HOST: mysql-db
+      REDIS_HOST: redis
+      S3_ENDPOINT: http://rustfs:9000
+    depends_on:
+      mysql-db:
+        condition: service_started
+      redis:
+        condition: service_healthy
+      rustfs:
+        condition: service_started
+
   mysql-db:
     image: mysql:8.0
     container_name: madtsanda_platform_database

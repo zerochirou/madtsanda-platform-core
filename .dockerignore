@@ -1,0 +1,35 @@
+# Dependencies
+node_modules
+
+# Build output
+build
+
+# Environment files (secrets)
+.env
+.env.local
+.env.*.local
+
+# AdonisJS generated
+.adonisjs
+
+# Git
+.git
+.gitignore
+
+# Editors
+.fleet
+.idea
+.vscode
+
+# Platform specific
+.DS_Store
+tmp
+rustfs_data
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Docs & misc
+*.md
