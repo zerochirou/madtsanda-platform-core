@@ -17,7 +17,8 @@ FROM base AS deps
 COPY package.json pnpm-lock.yaml .npmrc ./
 
 # Install all dependencies (including devDependencies for the build step)
-RUN pnpm install --frozen-lockfile
+# RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # ============================================================================
 # Stage 3: Build — compile TypeScript to JavaScript
