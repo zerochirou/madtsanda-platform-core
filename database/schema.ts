@@ -43,6 +43,39 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class LibrarySchema extends BaseModel {
+  static $columns = [
+    'author',
+    'available',
+    'category',
+    'createdAt',
+    'description',
+    'id',
+    'title',
+    'updatedAt',
+    'year',
+  ] as const
+  $columns = LibrarySchema.$columns
+  @column()
+  declare author: string
+  @column()
+  declare available: boolean
+  @column()
+  declare category: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: string
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare year: number
+}
+
 export class NewsSchema extends BaseModel {
   static $columns = [
     'categoryId',

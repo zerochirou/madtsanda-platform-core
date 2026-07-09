@@ -74,4 +74,11 @@ export interface ApiDefinition {
     showResearchByUserId: typeof routes['research.show_research_by_user_id']
     destroyResearch: typeof routes['research.destroy_research']
   }
+  libraries: {
+    showAllLibrary: typeof routes['libraries.show_all_library']
+    showLibraryById: typeof routes['libraries.show_library_by_id']
+    submitLibrary: typeof routes['libraries.submit_library']
+    editLibrary: typeof routes['libraries.edit_library']
+    destroyLibrary: typeof routes['libraries.destroy_library']
+  }
 }

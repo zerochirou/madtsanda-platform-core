@@ -655,4 +655,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/research_controller').default['destroyResearch']>>>
     }
   }
+  'libraries.show_all_library': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/library'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['showAllLibrary']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['showAllLibrary']>>>
+    }
+  }
+  'libraries.show_library_by_id': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/library/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['showLibraryById']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['showLibraryById']>>>
+    }
+  }
+  'libraries.submit_library': {
+    methods: ["POST"]
+    pattern: '/api/v1/library'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/library').createLibraryValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/library').createLibraryValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['submitLibrary']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['submitLibrary']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'libraries.edit_library': {
+    methods: ["PUT"]
+    pattern: '/api/v1/library/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/library').updateLibraryValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/library').updateLibraryValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['editLibrary']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['editLibrary']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'libraries.destroy_library': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/library/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['destroyLibrary']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/libraries_controller').default['destroyLibrary']>>>
+    }
+  }
 }

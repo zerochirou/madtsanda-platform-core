@@ -167,6 +167,25 @@ router
           .use(middleware.auth())
       })
       .prefix('/research')
+
+    // library
+    router
+      .group(() => {
+        router.get('/', [controllers.Libraries, 'showAllLibrary'])
+        router
+          .get('/:id', [controllers.Libraries, 'showLibraryById'])
+          .where('id', router.matchers.uuid())
+        router.post('/', [controllers.Libraries, 'submitLibrary']).use(middleware.auth())
+        router
+          .put('/:id', [controllers.Libraries, 'editLibrary'])
+          .where('id', router.matchers.uuid())
+          .use(middleware.auth())
+        router
+          .delete('/:id', [controllers.Libraries, 'destroyLibrary'])
+          .where('id', router.matchers.uuid())
+          .use(middleware.auth())
+      })
+      .prefix('/library')
   })
   .prefix('/api/v1')
   .use(apiThrottle)

@@ -1,4 +1,3 @@
-version: '3.8'
 name: madtsanda_platform
 
 services:

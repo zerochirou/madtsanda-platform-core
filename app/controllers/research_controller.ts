@@ -1,5 +1,4 @@
-import { researcherAccessControll } from '#abilities/main'
-import Research from '#models/research'
+import { adminAccessControll } from '#abilities/main'
 import { ResearchService } from '#services/research_service'
 import ResearchTransformer from '#transformers/research_transformer'
 import { createResearchValidator, updateResearchValidator } from '#validators/research'
@@ -10,10 +9,13 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class ResearchController {
   constructor(protected researchService: ResearchService) {}
 
-  private async adminAccessControll(ctx: HttpContext, post: Research) {
-    if (await ctx.bouncer.denies(researcherAccessControll, post)) {
-      return ctx.response.forbidden('You cannot edit this post')
+  private async adminAccessControll(ctx: HttpContext) {
+    if (await ctx.bouncer.denies(adminAccessControll)) {
+      ctx.response.forbidden('You cannot edit this')
+      return false
     }
+
+    return true
   }
 
   public async showAllResearchByPaginate(ctx: HttpContext) {
@@ -25,6 +27,8 @@ export default class ResearchController {
   }
 
   public async submitResearch(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const payload = await ctx.request.validateUsing(createResearchValidator)
     const research = await this.researchService.createResearch(payload)
 
@@ -45,8 +49,12 @@ export default class ResearchController {
   }
 
   public async showResearchBySearch(ctx: HttpContext) {
-    // Menggunakan 'q' sebagai query parameter, misalnya: ?q=machine learning
-    const query = ctx.request.input('q')
+    const query = String(ctx.request.input('q') ?? ctx.request.input('query') ?? '').trim()
+
+    if (!query) {
+      return ctx.serialize(ResearchTransformer.transform([]))
+    }
+
     const research = await this.researchService.findResearchBySearch(query)
 
     return ctx.serialize(ResearchTransformer.transform(research))
@@ -60,18 +68,18 @@ export default class ResearchController {
   }
 
   public async editResearch(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const id = ctx.request.param('id')
     const payload = await ctx.request.validateUsing(updateResearchValidator)
-    const post = await this.researchService.findResearchById(id)
-
-    await this.adminAccessControll(ctx, post)
-
     const updatedResearch = await this.researchService.updateResearch(id, payload)
 
     return ctx.serialize(ResearchTransformer.transform(updatedResearch))
   }
 
   public async destroyResearch(ctx: HttpContext) {
+    if (!(await this.adminAccessControll(ctx))) return
+
     const id = ctx.request.param('id')
     await this.researchService.destroyResearch(id)
 
