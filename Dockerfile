@@ -19,8 +19,8 @@ RUN apk add --no-cache python3 make g++
 # Copy dependency manifests
 COPY package.json pnpm-lock.yaml .npmrc ./
 
-# Install all dependencies (including devDependencies for the build step)
-RUN pnpm install --frozen-lockfile
+# PERBAIKAN: Ditambahkan env var untuk bypass blokir skrip pnpm v10
+RUN PNPM_ALLOW_ONLY_BUILT_DEPENDENCIES=1 pnpm install --frozen-lockfile
 
 # ============================================================================
 # Stage 3: Build — compile TypeScript to JavaScript
@@ -44,7 +44,8 @@ RUN apk add --no-cache python3 make g++
 COPY --from=build /app/build/package.json /app/build/pnpm-lock.yaml ./
 COPY --from=build /app/.npmrc ./
 
-RUN pnpm install --frozen-lockfile --prod
+# PERBAIKAN: Ditambahkan juga di sini karena pnpm mengulang proses build biner untuk prod
+RUN PNPM_ALLOW_ONLY_BUILT_DEPENDENCIES=1 pnpm install --frozen-lockfile --prod
 
 # ============================================================================
 # Stage 5: Production — lean runtime image
