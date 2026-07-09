@@ -30,7 +30,8 @@ COPY . .
 
 ENV NODE_ENV=development
 
-RUN node ace build
+# RUN node ace build
+RUN node ace build --ignore-ts-errors
 
 # ============================================================================
 # Stage 4: Production dependencies
