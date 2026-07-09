@@ -13,6 +13,9 @@ WORKDIR /app
 # ============================================================================
 FROM base AS deps
 
+# Native build tools required by better-sqlite3 and @swc/core
+RUN apk add --no-cache python3 make g++
+
 # Copy dependency manifests
 COPY package.json pnpm-lock.yaml .npmrc ./
 
@@ -31,7 +34,20 @@ COPY . .
 RUN node ace build
 
 # ============================================================================
-# Stage 4: Production — lean runtime image
+# Stage 4: Production deps — install only prod deps with native build tools
+# ============================================================================
+FROM base AS prod-deps
+
+# Native build tools for better-sqlite3
+RUN apk add --no-cache python3 make g++
+
+COPY --from=build /app/build/package.json /app/build/pnpm-lock.yaml ./
+COPY --from=build /app/.npmrc ./
+
+RUN pnpm install --frozen-lockfile --prod
+
+# ============================================================================
+# Stage 5: Production — lean runtime image
 # ============================================================================
 FROM base AS production
 
@@ -42,11 +58,8 @@ WORKDIR /app
 # Copy the compiled build output
 COPY --from=build /app/build ./
 
-# Copy .npmrc for pnpm config consistency
-COPY --from=build /app/.npmrc ./
-
-# Install production-only dependencies inside the build output
-RUN pnpm install --frozen-lockfile --prod
+# Copy production node_modules (with native modules already built)
+COPY --from=prod-deps /app/node_modules ./node_modules
 
 # AdonisJS default port
 EXPOSE 3333
