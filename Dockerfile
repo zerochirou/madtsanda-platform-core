@@ -1,69 +1,66 @@
 # ============================================================================
-# Stage 1: Base — Node.js LTS + pnpm
+# Stage 1: Base
 # ============================================================================
-FROM node:22-alpine AS base
+FROM node:24-alpine AS base
 
-# Install pnpm globally
-RUN corepack enable && corepack prepare pnpm@latest --activate
+ARG PNPM_VERSION=11.0.0
+
+RUN corepack enable && corepack prepare pnpm@${PNPM_VERSION} --activate
 
 WORKDIR /app
 
 # ============================================================================
-# Stage 2: Dependencies — install ALL deps (dev + prod) for building
+# Stage 2: Dependencies
 # ============================================================================
 FROM base AS deps
 
-# Native build tools required by better-sqlite3 and @swc/core
 RUN apk add --no-cache python3 make g++
 
-# Copy dependency manifests
-COPY package.json pnpm-lock.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY .npmrc* ./
 
-# PERBAIKAN: Ditambahkan env var untuk bypass blokir skrip pnpm v10
-RUN PNPM_ALLOW_ONLY_BUILT_DEPENDENCIES=1 pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # ============================================================================
-# Stage 3: Build — compile TypeScript to JavaScript
+# Stage 3: Build
 # ============================================================================
 FROM deps AS build
 
-# Copy the full source code
 COPY . .
 
-# Build the AdonisJS project (outputs to ./build)
+ENV NODE_ENV=development
+
 RUN node ace build
 
 # ============================================================================
-# Stage 4: Production deps — install only prod deps with native build tools
+# Stage 4: Production dependencies
 # ============================================================================
 FROM base AS prod-deps
 
-# Native build tools for better-sqlite3
 RUN apk add --no-cache python3 make g++
 
 COPY --from=build /app/build/package.json /app/build/pnpm-lock.yaml ./
-COPY --from=build /app/.npmrc ./
-
-# PERBAIKAN: Ditambahkan juga di sini karena pnpm mengulang proses build biner untuk prod
-RUN PNPM_ALLOW_ONLY_BUILT_DEPENDENCIES=1 pnpm install --frozen-lockfile --prod
-
-# ============================================================================
-# Stage 5: Production — lean runtime image
-# ============================================================================
-FROM base AS production
+COPY --from=build /app/pnpm-workspace.yaml ./
+COPY --from=build /app/.npmrc* ./
 
 ENV NODE_ENV=production
 
+RUN pnpm install --frozen-lockfile --prod
+
+# ============================================================================
+# Stage 5: Runtime
+# ============================================================================
+FROM node:24-alpine AS production
+
 WORKDIR /app
 
-# Copy the compiled build output
-COPY --from=build /app/build ./
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=3333
 
-# Copy production node_modules (with native modules already built)
+COPY --from=build /app/build ./
 COPY --from=prod-deps /app/node_modules ./node_modules
 
-# AdonisJS default port
 EXPOSE 3333
 
-# Start the server
 CMD ["node", "bin/server.js"]
