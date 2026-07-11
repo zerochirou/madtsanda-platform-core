@@ -10,6 +10,7 @@ export default class NewsTransformer extends BaseTransformer<News> {
       'pin',
       'user',
       'newsCategory',
+      'imageKey',
       'categoryId',
       'imageUrl',
       'createdAt',
