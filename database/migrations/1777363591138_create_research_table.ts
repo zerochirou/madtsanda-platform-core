@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary()
       table.string('title').unique()
-      table.string('abstrack')
+      table.text('abstrack')
       table.string('document_url').notNullable()
       table.string('document_key').notNullable()
       table.string('published_date')
