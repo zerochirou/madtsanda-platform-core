@@ -23,6 +23,8 @@ services:
     image: mysql:8.0
     container_name: madtsanda_platform_database
     restart: unless-stopped
+    env_file:
+      - .env.production # <--- TAMBAHKAN INI agar MySQL bisa membaca ${MYSQL_ROOT_PASSWORD} dll.
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -43,6 +45,8 @@ services:
     ports:
       - '9000:9000'
       - '9001:9001'
+    env_file:
+      - .env.production # <--- TAMBAHKAN INI agar RustFS bisa membaca ${RUSTFS_ACCESS_KEY} dll.
     environment:
       RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY}
       RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY}
@@ -55,6 +59,8 @@ services:
     image: redis:7-alpine
     container_name: redis_server
     restart: unless-stopped
+    env_file:
+      - .env.production # <--- TAMBAHKAN INI agar Redis bisa membaca ${REDIS_PASSWORD}
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
     volumes:
       - redis_data:/data
@@ -63,8 +69,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    environment:
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
 
 volumes:
   mysql_data:
